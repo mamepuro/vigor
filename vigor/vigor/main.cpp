@@ -1,5 +1,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include "test/test.h"
+#include "Window.h"
 
 void display(void)
 {
@@ -14,27 +16,30 @@ void display(void)
 }
 
 int main() {
+    //dialogtest
+    TestDialog();
     if (!glfwInit()) {
         return -1;
     }
-    GLFWwindow* window = glfwCreateWindow(1000, 800, "test", NULL, NULL);
-
+    //GLFWwindow* window = glfwCreateWindow(1000, 800, "test", NULL, NULL);
+    Window window;
     if (!window) {
         glfwTerminate();
         return -1;
     }
-    glfwMakeContextCurrent(window); //Ç±ÇÃä÷êîÇÊÇËÇ‡å„Ç…
+    //glfwMakeContextCurrent(window); //Ç±ÇÃä÷êîÇÊÇËÇ‡å„Ç…
+    //TODO: Ç»Ç∫Ç©glewÇ™é¿çsÇ≈Ç´Ç»Ç¢ÇÃÇ≈å¥àˆí≤ç∏Ç∆èCê≥ÇçsÇ§
     //glewInit(); //é¿çsÇµÇ»Ç≠ÇƒÇÕÇ¢ÇØÇ»Ç¢
     glfwSwapInterval(1);
 
-    while (!glfwWindowShouldClose(window)) {
+    while (window) {
         glClearColor(0.8f, 0.8f, 0.8f, 0.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   
+        TestOpenGL();
+        
 
-        display();
-
-        glfwSwapBuffers(window);
+        window.swapBuffer();
         glfwPollEvents();
     }
 
