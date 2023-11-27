@@ -1,3 +1,6 @@
 ﻿  main.cpp
-C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(703,5): error MSB6006: "CL.exe" はコード 2 を伴って終了しました。
-C:\Users\ayata\Documents\vigor\vigor\main.cpp(1,10): fatal  error C1083: include ファイルを開けません。'GL/glew.h':No such file or directory
+C:\Users\ayata\OneDrive - 筑波大学\Develop\Dev\vigor\vigor\vigor\main.cpp(1,10): fatal  error C1083: include ファイルを開けません。'GL/glew.h':No such file or directory
+  test.cpp
+C:\Users\ayata\OneDrive - 筑波大学\Develop\Dev\vigor\vigor\vigor\test.cpp(2,10): fatal  error C1083: include ファイルを開けません。'GL/glew.h':No such file or directory
+  Window.cpp
+  コードを生成中...

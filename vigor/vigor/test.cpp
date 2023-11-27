@@ -10,11 +10,11 @@ void TestDialog() {
 
 void TestOpenGL() {
     glClear(GL_COLOR_BUFFER_BIT);
-    glBegin(GL_LINE_LOOP);
-    glVertex2d(-0.9, -0.9);
-    glVertex2d(0.9, -0.9);
-    glVertex2d(0.9, 0.9);
-    glVertex2d(-0.9, 0.9);
+    glBegin(GL_POLYGON);
+    glVertex3d(-0.0, -0.0, 0.2);
+    glVertex3d(0.9, -0.9, 0.2);
+    glVertex3d(0.9, 0.9, 0.2);
+    glVertex3d(-0.9, 0.9, 0.2);
     glEnd();
     glFlush();
 }

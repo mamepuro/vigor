@@ -3,7 +3,8 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include<glm/glm.hpp>
-
+#include<glm/gtc/matrix_transform.hpp>
+#include <cmath>
 
 class Window
 {
@@ -26,10 +27,6 @@ public:
 		//リサイズ時のコールバック関数(イベント発火時に呼ばれる関数)を登録する.
 		glfwSetWindowSizeCallback(_mWindow, resizeWindow);
 		resizeWindow(_mWindow, width, height);
-		glMatrixMode(GL_PROJECTION);
-		glLoadIdentity();
-		glm::mat4 
-		glLoadMatrixd();
 		glfwSwapInterval(1);
 	}
 
@@ -59,6 +56,21 @@ public:
 
 		//ビューポート(描画範囲)の設定を行う
 		glViewport(0, 0, framebufferWidth, framebufferWidth);
+		/*
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+		gluPerspective(45.0f, (float)width / (float)height, 0.1f, 100.0f);
+		*/
+		
+		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
+
+		//視点の設定
+		gluLookAt(0.0, 0.0, -5.0, //カメラの座標
+			0.0, 0.0, 0.0, // 注視点の座標
+			0.0, 1.0, 0.0); // 画面の上方向を指すベクトル
+			
+			
 	}
 };
 
