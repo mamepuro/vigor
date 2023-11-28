@@ -1,4 +1,12 @@
 ﻿  application.cpp
+  camera.cpp
+  main.cpp
+  Mesh.cpp
+C:\Users\ayata\Desktop\vigor\vigor\vigor\Mesh.cpp(11,80): warning C4267: '初期化中': 'size_t' から 'GLuint' に変換しました。データが失われているかもしれません。
+  MeshEntity.cpp
+  test.cpp
+  Window.cpp
+  コードを生成中...
 glew32s.lib(glew.obj) : warning LNK4099: PDB '' が 'glew32s.lib(glew.obj)' で、または '' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
 LINK : warning LNK4098: defaultlib 'LIBCMT' は他のライブラリの使用と競合しています。/NODEFAULTLIB:library を使用してください。
-  vigor.vcxproj -> C:\Users\ayata\OneDrive - 筑波大学\Develop\Dev\vigor\vigor\x64\Debug\vigor.exe
+  vigor.vcxproj -> C:\Users\ayata\Desktop\vigor\vigor\x64\Debug\vigor.exe
