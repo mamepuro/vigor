@@ -248,6 +248,7 @@ namespace game {
 
 		}
 
+
 		//TODO: 本当にこの実装でいいの？
 		//稜線描画用に，もう一度稜線描画を行うシェーダを呼び，描画命令を呼ぶ
 		glUseProgram(program_edge_);
