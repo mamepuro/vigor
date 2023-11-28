@@ -8,6 +8,11 @@ namespace game {
         glDrawArrays(GL_TRIANGLES, 0, size_);
     }
 
+    void Mesh::Draw(GLuint program) const {
+        glBindVertexArray(vao_);
+        glDrawArrays(GL_LINE_LOOP, 0, size_);
+    }
+
     Mesh::Mesh(const std::vector<glm::vec3>& vertices): size_(vertices.size()) {
         glGenVertexArrays(1, &vao_);
         glBindVertexArray(vao_);
