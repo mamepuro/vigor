@@ -17,6 +17,10 @@ namespace game {
 
 	class Mesh {
 	public:
+		std::vector<glm::vec3> vertices_;
+		std::vector<glm::vec3> GetVertices() const;
+		void SetVertices(std::vector<glm::vec3> vertices);
+		void UpdateModel();
 		/**
 		 * @brief VAOをバインドし描画する
 		 */
@@ -34,7 +38,7 @@ namespace game {
 		 * ジオメトリを構築し、VBOとVAOを構築します。
 		 * 各種頂点情報は前から順に3つずつで一つの面を構成していきます。
 		 */
-		Mesh(const std::vector<glm::vec3>& vertices);
+		Mesh(std::vector<glm::vec3>& vertices);
 		/**
 		 * @brief デストラクタ
 		 *

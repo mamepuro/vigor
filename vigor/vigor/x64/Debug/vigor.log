@@ -1,7 +1,4 @@
-﻿  Mesh.cpp
-C:\dev\vigor\vigor\vigor\Mesh.cpp(16,80): warning C4267: '初期化中': 'size_t' から 'GLuint' に変換しました。データが失われているかもしれません。
+﻿  application.cpp
   MeshEntity.cpp
-  application.cpp
-  main.cpp
   コードを生成中...
-  vigor.vcxproj -> C:\dev\vigor\vigor\x64\Debug\vigor.exe
+  vigor.vcxproj -> C:\Users\ayata\OneDrive - 筑波大学\Develop\Dev\vigor\vigor\x64\Debug\vigor.exe

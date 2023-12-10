@@ -3,6 +3,19 @@
 
 namespace game {
 
+    std::vector<glm::vec3> Mesh::GetVertices() const {
+        return vertices_;
+    }
+    void Mesh::SetVertices(std::vector<glm::vec3> vertices) {
+        vertices_ = vertices;
+        UpdateModel();
+    }
+
+    void Mesh::UpdateModel() {
+        //VBOÇÃçXêVÇçsÇ§
+        glNamedBufferSubData(1, 0, sizeof(glm::vec3) * vertices_.size(), &vertices_[0]);
+    }
+
     void Mesh::Draw() const {
         glBindVertexArray(vao_);
         glDrawArrays(GL_TRIANGLES, 0, size_);
@@ -13,14 +26,15 @@ namespace game {
         glDrawArrays(GL_LINE_LOOP, 0, size_);
     }
 
-    Mesh::Mesh(const std::vector<glm::vec3>& vertices): size_(vertices.size()) {
+    Mesh::Mesh(std::vector<glm::vec3>& vertices) : size_(vertices.size()) {
+        vertices_ = vertices;
         glGenVertexArrays(1, &vao_);
         glBindVertexArray(vao_);
 
         glGenBuffers(1, &vertices_vbo_);
         glBindBuffer(GL_ARRAY_BUFFER, vertices_vbo_);
-        glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec3),
-            &vertices[0], GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, vertices_.size() * sizeof(glm::vec3),
+            &vertices_[0], GL_DYNAMIC_DRAW);
         glEnableVertexAttribArray(0);
         glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, static_cast<void*>(0));
 
@@ -126,8 +140,9 @@ namespace game {
             unsigned int vertexIndex = vertex_indices[i];
             vertices.emplace_back(tmp_vertices[vertexIndex - 1]);
         }
-
-        return std::make_shared<Mesh>(vertices);
+        auto mesh = std::make_shared<Mesh>(vertices);
+        mesh->vertices_ = vertices;
+        return mesh;
     }
 
 }  // namespace game

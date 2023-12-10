@@ -12,6 +12,7 @@
 #include "MeshEntity.h"
 #include "camera.h"
 #include "mesh.h"
+#include "block.h"
 
 namespace game {
 
@@ -45,7 +46,7 @@ namespace game {
 		GLuint program_edge_;
 		GLuint model_loc_;
 		GLuint view_projection_loc_;
-		std::vector<MeshEntity> mesh_entities_;
+		std::vector <MeshEntity> mesh_entities_;
 		std::unique_ptr<Camera> camera_;
 
 		/**

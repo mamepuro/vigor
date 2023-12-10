@@ -12,10 +12,32 @@ namespace game {
     /**
      * @brief MeshとModel行列を保持するクラス
      */
+
     class MeshEntity {
     public:
-        const std::shared_ptr<const Mesh> mesh_;
-
+        std::shared_ptr<Mesh> mesh_;
+        int leg_right_ind;
+        int leg_left_ind;
+        glm::vec3 r_velocity_prev;
+        glm::vec3 l_velocity_prev;
+        glm::vec3 r_position_prev;
+        glm::vec3 l_position_prev;
+        float restLength;
+        std::vector<float> r_restLengths;
+        std::vector<float> l_restLengths;
+        /// <summary>
+        /// 左の脚に接続しているMeshEntityの実態
+        /// </summary>
+        std::vector<MeshEntity> r_connect;
+        std::vector<int> r_connect_ind;
+        std::vector<MeshEntity> l_connect;
+        std::vector<int> l_connect_ind;
+        void Simulate(float delta);
+        /// <summary>
+        /// メッシュエンティティを縦に接続する。なお、初期位置は接続元から微小距離rだけ離れた位置とする
+        /// </summary>
+        /// <param name="meshEntity">エンティティ</param>
+        void ConnectTo(game::MeshEntity &meshEntity);
         /**
          * @brief シーン上の位置を返す
          * @return シーン上の位置
@@ -76,8 +98,8 @@ namespace game {
          *
          * オイラー角はYXZの順です。
          */
-        MeshEntity(const std::shared_ptr<const Mesh> mesh, const glm::vec3 position,
-            const glm::vec3 rotation, const glm::vec3 scale);
+        MeshEntity(std::shared_ptr<Mesh> mesh, const glm::vec3 position,
+            const glm::vec3 rotation, const glm::vec3 scale, int r, int l);
 
     private:
         glm::vec3 position_;
