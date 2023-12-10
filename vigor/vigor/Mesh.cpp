@@ -13,7 +13,8 @@ namespace game {
 
     void Mesh::UpdateModel() {
         //VBOの更新を行う
-        glNamedBufferSubData(1, 0, sizeof(glm::vec3) * vertices_.size(), &vertices_[0]);
+        //CAUTION: GLuint bufferは対象のオブジェクトIDが入る。マジックナンバー(1などの定数)を指定すると、特定のオブジェクトの再描画のみが行われてしまうので注意すること
+        glNamedBufferSubData(vao_, 0, sizeof(glm::vec3) * vertices_.size(), &vertices_[0]);
     }
 
     void Mesh::Draw() const {
@@ -23,7 +24,7 @@ namespace game {
 
     void Mesh::Draw(GLuint program) const {
         glBindVertexArray(vao_);
-        glDrawArrays(GL_LINE_LOOP, 0, size_);
+        glDrawArrays(GL_LINES, 0, size_);
     }
 
     Mesh::Mesh(std::vector<glm::vec3>& vertices) : size_(vertices.size()) {

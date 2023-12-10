@@ -32,12 +32,17 @@ namespace game {
         std::vector<int> r_connect_ind;
         std::vector<MeshEntity> l_connect;
         std::vector<int> l_connect_ind;
+        const float tate_r = 0.6;
+        const int pocket_right_ind = 0;
+        const int pocket_left_ind = 3;
+        glm::vec3 r_pocketToLeg;
+        glm::vec3 l_pocketToLeg;
         void Simulate(float delta);
         /// <summary>
         /// メッシュエンティティを縦に接続する。なお、初期位置は接続元から微小距離rだけ離れた位置とする
         /// </summary>
         /// <param name="meshEntity">エンティティ</param>
-        void ConnectTo(game::MeshEntity &meshEntity);
+        void ConnectTo(game::MeshEntity &meshEntity, game::MeshEntity &me);
         /**
          * @brief シーン上の位置を返す
          * @return シーン上の位置

@@ -1,4 +1,4 @@
-﻿  application.cpp
-  MeshEntity.cpp
-  コードを生成中...
+﻿  MeshEntity.cpp
+C:\Users\ayata\OneDrive - 筑波大学\Develop\Dev\vigor\vigor\vigor\MeshEntity.h(35,30): warning C4305: '初期化中': 'double' から 'const float' へ切り詰めます。
+C:\Users\ayata\OneDrive - 筑波大学\Develop\Dev\vigor\vigor\vigor\MeshEntity.cpp(86,17): warning C4305: '初期化中': 'double' から 'float' へ切り詰めます。
   vigor.vcxproj -> C:\Users\ayata\OneDrive - 筑波大学\Develop\Dev\vigor\vigor\x64\Debug\vigor.exe

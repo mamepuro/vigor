@@ -146,7 +146,7 @@ namespace game {
 				//PrintParam(camera_->GetPosition());
 				//カメラを回転させる
 				auto v = mesh_entities_[1].mesh_->GetVertices();
-				v[mesh_entities_[1].leg_left_ind].z += 0.1f;
+				v[0].z += 0.1f;
 				mesh_entities_[1].mesh_->SetVertices(v);
 				std::cerr << "z + 4" << std::endl;
 				//PrintParam(camera_->GetRotation());
@@ -160,7 +160,7 @@ namespace game {
 			{
 				if (currentKeyStateSpace == GLFW_PRESS)
 				{
-					mesh_entities_[1].ConnectTo(mesh_entities_[2]);
+					mesh_entities_[0].ConnectTo(mesh_entities_[1], mesh_entities_[0]);
 					std::cerr << "connected 0 to 1" << std::endl;
 					prevKeyState = GLFW_PRESS;
 				}
@@ -197,27 +197,24 @@ namespace game {
 		// Meshの読み込み
 	  //TODO:ファイルがnullならエラーを返す処理を追加する
 		std::vector<std::shared_ptr<game::Mesh>> mesh_obj;
-		//for (int i = 0; i < 3; i++)
-		//{
-		//	auto mesh = Mesh::LoadObjMesh("block.obj");
-		//	mesh_obj.push_back(mesh);
-		//}
-		auto mesh = Mesh::LoadObjMesh("block.obj");
-		auto mesh1 = Mesh::LoadObjMesh("block.obj");
-		auto mesh2 = Mesh::LoadObjMesh("block.obj");
+		for (int i = 0; i < 3; i++)
+		{
+			auto mesh = Mesh::LoadObjMesh("block.obj");
+			mesh_obj.push_back(mesh);
+		}
 		// MeshEntityの作成
-		mesh_entities_.emplace_back(mesh1, glm::vec3(0.0f, 0.0f, 0.0f),
+		mesh_entities_.emplace_back(mesh_obj[0], glm::vec3(0.0f, 0.0f, 0.0f),
 			glm::vec3(0.0f), glm::vec3(1.0f), 1, 5);
-		mesh_entities_.emplace_back(mesh1, glm::vec3(2.0f, 0.0f, 0.0f),
+		mesh_entities_.emplace_back(mesh_obj[1], glm::vec3(0.0f, 0.0f, 0.0f),
 			glm::vec3(0.0f), glm::vec3(1.0f), 1, 5);
-		mesh_entities_.emplace_back(mesh1, glm::vec3(-2.0f, 0.0f, 0.0f),
-			glm::vec3(0.0f), glm::vec3(1.0f), 1, 5);
+		/*mesh_entities_.emplace_back(mesh_obj[2], glm::vec3(-0.0f, 0.0f, 0.0f),
+			glm::vec3(0.0f), glm::vec3(1.0f), 1, 5);*/
 		mesh_entities_[0].r_connect.push_back(mesh_entities_[0]);
 		mesh_entities_[0].l_connect.push_back(mesh_entities_[0]);
 		mesh_entities_[1].r_connect.push_back(mesh_entities_[1]);
 		mesh_entities_[1].l_connect.push_back(mesh_entities_[1]);
-		mesh_entities_[2].r_connect.push_back(mesh_entities_[2]);
-		mesh_entities_[2].l_connect.push_back(mesh_entities_[2]);
+		//mesh_entities_[2].r_connect.push_back(mesh_entities_[2]);
+		//mesh_entities_[2].l_connect.push_back(mesh_entities_[2]);
 		// Cameraの作成
 		camera_ = std::make_unique<Camera>(
 			glm::vec3(0.0f, 0.0f, 10.0f), glm::vec3(0.0f), glm::radians(60.0f),
@@ -300,7 +297,7 @@ namespace game {
 		glUniformMatrix4fv(view_projection_loc_, 1, GL_FALSE, &view_projection[0][0]);
 
 		for (auto&& mesh_entity : mesh_entities_) {
-			//mesh_entity.Simulate(0.1);
+			mesh_entity.Simulate(0.01);
 			auto model = mesh_entity.GetModelMatrix();
 			glUniformMatrix4fv(model_loc_, 1, GL_FALSE, &model[0][0]);
 			mesh_entity.mesh_->Draw(program_edge_);
