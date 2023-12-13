@@ -88,8 +88,8 @@ namespace game {
         glm::vec3 r_pos = r_position_prev + r_velocity_prev * delta;
         glm::vec3 l_velocity = l_velocity_prev + d * -l_force * delta;
         glm::vec3 l_pos = l_position_prev + l_velocity_prev * delta;
-        float force_r = glm::length(r_force);
-        float force_l = glm::length(l_force);
+        float force_r = glm::length(r_force); //Only use debug
+        float force_l = glm::length(l_force); //Only use debug
         r_velocity_prev = r_velocity;
         r_position_prev = r_pos;
         l_velocity_prev = l_velocity;
@@ -134,15 +134,33 @@ namespace game {
 
         mesh_->SetVertices(myVertex);
         connected.mesh_->SetVertices(target_vertex);
-        auto restLength = glm::length(target_vertex[leg_right_ind] - myVertex[leg_left_ind]);
+        //auto restLength = glm::length(target_vertex[leg_right_ind] - myVertex[leg_left_ind]);
+        //r_restLengths.push_back(restLength);
+        //l_restLengths.push_back(restLength);
+        //connected.r_restLengths.push_back(restLength);
+        //connected.l_restLengths.push_back(restLength);
+        //r_connect_ind.push_back(leg_left_ind);
+        //l_connect_ind.push_back(leg_right_ind);
+        //connected.r_connect_ind.push_back(leg_left_ind);
+        //connected.l_connect_ind.push_back(leg_right_ind);
+        //r_connect.push_back(connected);
+        //l_connect.push_back(connected);
+        //connected.r_connect.push_back(me);
+        //connected.l_connect.push_back(me);
+        //r_position_prev = myVertex[leg_right_ind];
+        //l_position_prev = myVertex[leg_left_ind];
+        //connected.r_position_prev = target_vertex[leg_right_ind];
+        //connected.l_position_prev = target_vertex[leg_left_ind];
+
+        auto restLength = glm::length(target_vertex[leg_left_ind] - myVertex[leg_left_ind]);
         r_restLengths.push_back(restLength);
         l_restLengths.push_back(restLength);
         connected.r_restLengths.push_back(restLength);
         connected.l_restLengths.push_back(restLength);
-        r_connect_ind.push_back(leg_left_ind);
-        l_connect_ind.push_back(leg_right_ind);
-        connected.r_connect_ind.push_back(leg_left_ind);
-        connected.l_connect_ind.push_back(leg_right_ind);
+        r_connect_ind.push_back(leg_right_ind);
+        l_connect_ind.push_back(leg_left_ind);
+        connected.r_connect_ind.push_back(leg_right_ind);
+        connected.l_connect_ind.push_back(leg_left_ind);
         r_connect.push_back(connected);
         l_connect.push_back(connected);
         connected.r_connect.push_back(me);

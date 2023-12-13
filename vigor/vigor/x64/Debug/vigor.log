@@ -1,4 +1,11 @@
-﻿  MeshEntity.cpp
-C:\Users\ayata\OneDrive - 筑波大学\Develop\Dev\vigor\vigor\vigor\MeshEntity.h(35,30): warning C4305: '初期化中': 'double' から 'const float' へ切り詰めます。
-C:\Users\ayata\OneDrive - 筑波大学\Develop\Dev\vigor\vigor\vigor\MeshEntity.cpp(86,17): warning C4305: '初期化中': 'double' から 'float' へ切り詰めます。
-  vigor.vcxproj -> C:\Users\ayata\OneDrive - 筑波大学\Develop\Dev\vigor\vigor\x64\Debug\vigor.exe
+﻿  application.cpp
+C:\Users\ayata\Desktop\vigor\vigor\vigor\MeshEntity.h(35): warning C4305: '初期化中': 'double' から 'const float' へ切り詰めます。
+C:\Users\ayata\Desktop\vigor\vigor\vigor\application.cpp(300,30): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+  main.cpp
+C:\Users\ayata\Desktop\vigor\vigor\vigor\MeshEntity.h(35): warning C4305: '初期化中': 'double' から 'const float' へ切り詰めます。
+  massPoint.cpp
+C:\Users\ayata\Desktop\vigor\vigor\vigor\MeshEntity.h(35): warning C4305: '初期化中': 'double' から 'const float' へ切り詰めます。
+  コードを生成中...
+glew32s.lib(glew.obj) : warning LNK4099: PDB '' が 'glew32s.lib(glew.obj)' で、または '' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
+LINK : warning LNK4098: defaultlib 'LIBCMT' は他のライブラリの使用と競合しています。/NODEFAULTLIB:library を使用してください。
+  vigor.vcxproj -> C:\Users\ayata\Desktop\vigor\vigor\x64\Debug\vigor.exe

@@ -297,7 +297,7 @@ namespace game {
 		glUniformMatrix4fv(view_projection_loc_, 1, GL_FALSE, &view_projection[0][0]);
 
 		for (auto&& mesh_entity : mesh_entities_) {
-			mesh_entity.Simulate(0.01);
+			mesh_entity.Simulate(0.005);
 			auto model = mesh_entity.GetModelMatrix();
 			glUniformMatrix4fv(model_loc_, 1, GL_FALSE, &model[0][0]);
 			mesh_entity.mesh_->Draw(program_edge_);
