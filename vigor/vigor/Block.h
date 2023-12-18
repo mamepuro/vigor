@@ -14,6 +14,7 @@
 
 namespace game {
 	class massPoint;
+	class Spring;
 	class Block : game::MeshEntity
 	{
 	public:
@@ -28,8 +29,8 @@ namespace game {
 		/// ブロックが持つ質点のコレクション
 		/// 質点はブロックの全ての頂点に設置され、このコレクションには頂点順に質点が格納される
 		/// </summary>
-		std::vector<game::massPoint> massPoints;
-
+		std::vector<game::massPoint*> massPoints;
+		std::vector<game::Spring*> springs;
 		Block(std::shared_ptr<Mesh> mesh,
 			const glm::vec3 position,
 			const glm::vec3 rotation,
@@ -41,6 +42,7 @@ namespace game {
 			int _legRightInsertBlockID,
 			int _pocketLeftInsertBlockID,
 			int _pocketRightInsertBlockID);
+		void SetSpring(game::Spring spring);
 	private:
 	};
 }

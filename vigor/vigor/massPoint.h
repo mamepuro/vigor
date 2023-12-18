@@ -6,6 +6,7 @@ namespace game {
 	class Block;
 	class massPoint
 	{
+	public:
 		/// <summary>
 		/// 自身が所属するブロックのID
 		/// </summary>
@@ -28,7 +29,8 @@ namespace game {
 		/// <param name="_blockID"></param>
 		/// <param name="vertexIndex"></param>
 		/// <param name="_block"></param>
-		massPoint(int _blockID, int vertexIndex, Block _block);
+		massPoint(int _blockID, int vertexIndex, Block* _block);
+	private:
 	};
 }
 
