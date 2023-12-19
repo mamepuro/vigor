@@ -1,9 +1,4 @@
-﻿  Block.cpp
-C:\Users\ayata\Desktop\vigor\vigor\vigor\MeshEntity.h(35): warning C4305: '初期化中': 'double' から 'const float' へ切り詰めます。
-  massPoint.cpp
-C:\Users\ayata\Desktop\vigor\vigor\vigor\MeshEntity.h(35): warning C4305: '初期化中': 'double' から 'const float' へ切り詰めます。
-  コードを生成中...
-glew32s.lib(glew.obj) : warning LNK4099: PDB '' が 'glew32s.lib(glew.obj)' で、または '' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
-LINK : warning LNK4098: defaultlib 'LIBCMT' は他のライブラリの使用と競合しています。/NODEFAULTLIB:library を使用してください。
-Block.obj : error LNK2019: 未解決の外部シンボル "public: __cdecl game::massPoint::massPoint(int,int,class game::Block *)" (??0massPoint@game@@QEAA@HHPEAVBlock@1@@Z) が関数 "public: __cdecl game::Block::Block(class std::shared_ptr<class game::Mesh>,struct glm::vec<3,float,0>,struct glm::vec<3,float,0>,struct glm::vec<3,float,0>,int,int,class std::vector<struct glm::vec<3,float,0>,class std::allocator<struct glm::vec<3,float,0> > >,int,int,int,int)" (??0Block@game@@QEAA@V?$shared_ptr@VMesh@game@@@std@@U?$vec@$02M$0A@@glm@@11HHV?$vector@U?$vec@$02M$0A@@glm@@V?$allocator@U?$vec@$02M$0A@@glm@@@std@@@3@HHHH@Z) で参照されました
-C:\Users\ayata\Desktop\vigor\vigor\x64\Debug\vigor.exe : fatal error LNK1120: 1 件の未解決の外部参照
+﻿  application.cpp
+C:\Users\ayata\OneDrive - 筑波大学\Develop\Dev\vigor\vigor\vigor\MeshEntity.h(35,30): warning C4305: '初期化中': 'double' から 'const float' へ切り詰めます。
+C:\Users\ayata\OneDrive - 筑波大学\Develop\Dev\vigor\vigor\vigor\application.cpp(306,26): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+  vigor.vcxproj -> C:\Users\ayata\OneDrive - 筑波大学\Develop\Dev\vigor\vigor\x64\Debug\vigor.exe

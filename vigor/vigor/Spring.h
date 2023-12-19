@@ -13,12 +13,13 @@ namespace game{
 		game::massPoint *right;
 		float currentLength;
 		springType m_springType;
-		Spring(float _k, game::massPoint* _left, game::massPoint* _right, float restLength, springType springType);
-	private:
-		//バネ定数
-		float k;
 		//初期の長さ
 		float restLength;
+		//バネ定数
+		float k;
+		Spring(float _k, game::massPoint* _left, game::massPoint* _right, float restLength, springType springType);
+	private:
+
 	};
 
 }

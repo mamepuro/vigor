@@ -15,9 +15,10 @@
 namespace game {
 	class massPoint;
 	class Spring;
-	class Block : game::MeshEntity
+	class Block : public game::MeshEntity
 	{
 	public:
+		/*脚の番号 1, 5 ポケットの番号0,3*/
 		const int ID;
 		int union_ID;
 		std::vector<glm::vec3> positions;
@@ -25,6 +26,8 @@ namespace game {
 		int legRightInsertBlockID;
 		int pocketLeftInsertBlockID;
 		int pocketRightInsertBlockID;
+		std::vector<Block*> r_connect;
+		std::vector<Block*> l_connect;
 		/// <summary>
 		/// ブロックが持つ質点のコレクション
 		/// 質点はブロックの全ての頂点に設置され、このコレクションには頂点順に質点が格納される
@@ -42,7 +45,10 @@ namespace game {
 			int _legRightInsertBlockID,
 			int _pocketLeftInsertBlockID,
 			int _pocketRightInsertBlockID);
-		void SetSpring(game::Spring spring);
+		void SetSpring(game::Spring* spring);
+		void Simulate(float delta);
+		void Connect(Block* _target);
+		void TestBend();
 	private:
 	};
 }

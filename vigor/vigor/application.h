@@ -46,7 +46,7 @@ namespace game {
 		GLuint program_edge_;
 		GLuint model_loc_;
 		GLuint view_projection_loc_;
-		std::vector <MeshEntity> mesh_entities_;
+		std::vector <Block> mesh_entities_;
 		std::unique_ptr<Camera> camera_;
 
 		/**
