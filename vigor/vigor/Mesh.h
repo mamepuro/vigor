@@ -66,6 +66,11 @@ namespace game {
 		 */
 		Mesh& operator=(Mesh&& other) noexcept;
 
+		/// <summary>
+		/// テスト用のメッシュファイルを作成する
+		/// </summary>
+		/// <returns>メッシュデータ</returns>
+		static std::shared_ptr<Mesh> CreateTestMesh();
 		/**
    * @brief objを読み込む静的メンバ関数
    * @param file 読み込むobjファイルのパス
