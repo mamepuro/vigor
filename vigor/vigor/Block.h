@@ -48,6 +48,10 @@ namespace game {
 		void SetSpring(game::Spring* spring);
 		void Simulate(float delta);
 		void Connect(Block* _target);
+		/// <summary>
+		/// ‰¡Œü‚«‚ÉÚ‘±‚ğs‚¤
+		/// </summary>
+		void ConnectNext(Block* _target);
 		void TestBend();
 	private:
 	};

@@ -146,15 +146,15 @@ namespace game {
         return mesh;
     }
 
-    std::shared_ptr<Mesh> Mesh::CreateTestMesh()
-    {
-        std::vector<glm::vec3> verices = 
-        {
-            //–Ê1
-            glm::vec3(-0.5, 0.5,0.5),
-            glm::vec3(-0.25, 0.5,0.5),
-            glm::vec3(-0.25, 0.5,0.5),
-        };
-    }
+    //std::shared_ptr<Mesh> Mesh::CreateTestMesh()
+    //{
+    //    std::vector<glm::vec3> verices = 
+    //    {
+    //        //–Ê1
+    //        glm::vec3(-0.5, 0.5,0.5),
+    //        glm::vec3(-0.25, 0.5,0.5),
+    //        glm::vec3(-0.25, 0.5,0.5),
+    //    };
+    //}
 
 }  // namespace game

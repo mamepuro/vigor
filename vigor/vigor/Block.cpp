@@ -170,6 +170,54 @@ namespace game {
 		//return target_vertex;
 	};
 
+	void Block::ConnectNext(Block* _target)
+	{
+		auto target_mesh = _target->mesh_;
+		auto target_vertex = target_mesh->GetVertices();
+		auto myVertex = mesh_->GetVertices();
+		int count = 0;
+		auto move = glm::vec3(0);
+		move.x = move.x + myVertex[1].x * 2;
+		for (auto var : target_vertex)
+		{
+			//‰E‘¤‚ÌŒvŽZ
+			if (count < 3)
+			{
+				target_vertex[count] = myVertex[count] + move;
+			}
+			//¶‘¤‚ÌŒvŽZ
+			else
+			{
+				target_vertex[count] = myVertex[count] + move;
+			}
+			count++;
+		}
+
+		mesh_->SetVertices(myVertex);
+		for (auto massPoint : massPoints)
+		{
+			massPoint->prev_position = myVertex[massPoint->vertexIndex];
+		}
+		for (auto massPoint : _target->massPoints)
+		{
+			massPoint->prev_position = target_vertex[massPoint->vertexIndex];
+		}
+		_target->mesh_->SetVertices(target_vertex);
+		springType sp = springType::Union;
+		massPoints[0]->AddSpring(_target->massPoints[0], sp);
+		massPoints[1]->AddSpring(_target->massPoints[1], sp);
+		massPoints[2]->AddSpring(_target->massPoints[2], sp);
+		massPoints[3]->AddSpring(_target->massPoints[3], sp);
+		massPoints[4]->AddSpring(_target->massPoints[4], sp);
+		massPoints[5]->AddSpring(_target->massPoints[5], sp);
+		_target->massPoints[0]->AddSpring(massPoints[0], sp);
+		_target->massPoints[1]->AddSpring(massPoints[1], sp);
+		_target->massPoints[2]->AddSpring(massPoints[2], sp);
+		_target->massPoints[3]->AddSpring(massPoints[3], sp);
+		_target->massPoints[4]->AddSpring(massPoints[4], sp);
+		_target->massPoints[5]->AddSpring(massPoints[5], sp);
+	};
+
 	void Block::TestBend() {
 		auto myVertex = mesh_->GetVertices();
 		auto length = glm::length(myVertex[pocket_right_ind] - myVertex[leg_right_ind]);

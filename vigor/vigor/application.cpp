@@ -161,7 +161,8 @@ namespace game {
 				if (currentKeyStateSpace == GLFW_PRESS)
 				{
 					//mesh_entities_[0].ConnectTo(mesh_entities_[1], mesh_entities_[0]);
-					mesh_entities_[0].Connect(&mesh_entities_[1]);
+					//mesh_entities_[0].Connect(&mesh_entities_[1]);
+					mesh_entities_[0].ConnectNext(&mesh_entities_[1]);
 					//mesh_entities_[0].TestBend();
 					std::cerr << "connected 0 to 1" << std::endl;
 					prevKeyState = GLFW_PRESS;
@@ -199,7 +200,7 @@ namespace game {
 		// Meshの読み込み
 	  //TODO:ファイルがnullならエラーを返す処理を追加する
 		std::vector<std::shared_ptr<game::Mesh>> mesh_obj;
-		for (int i = 0; i < 3; i++)
+		for (int i = 0; i < 4; i++)
 		{
 			auto mesh = Mesh::LoadObjMesh("block.obj");
 			mesh_obj.push_back(mesh);
@@ -303,7 +304,7 @@ namespace game {
 		glUniformMatrix4fv(view_projection_loc_, 1, GL_FALSE, &view_projection[0][0]);
 
 		for (auto&& mesh_entity : mesh_entities_) {
-			 mesh_entity.Simulate(0.005);
+			mesh_entity.Simulate(0.0001);
 			auto model = mesh_entity.GetModelMatrix();
 			glUniformMatrix4fv(model_loc_, 1, GL_FALSE, &model[0][0]);
 			mesh_entity.mesh_->Draw(program_edge_);
