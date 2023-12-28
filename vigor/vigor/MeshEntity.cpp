@@ -62,41 +62,41 @@ namespace game {
     /// </summary>
     /// <param name="delta"></param>
     void MeshEntity::Simulate(float delta) {
-        glm::vec3 r_force = glm::vec3(0);
-        glm::vec3 l_force = glm::vec3(0);
-        auto vertices = mesh_->GetVertices();
-        int count = 0;
-        for (auto var :r_connect)
-        {
-            auto target_vertices = (var.mesh_->GetVertices());
-            auto target_vertex = target_vertices[r_connect_ind[count]];
-            auto Lr = r_restLengths[count] / glm::length(vertices[leg_right_ind] - target_vertex);
-            r_force += (1 - Lr) * (vertices[leg_right_ind] - target_vertex);
-            count++;
-        }
-        count = 0;
-        for (auto var : l_connect)
-        {
-            auto target_vertices = (var.mesh_->GetVertices());
-            auto target_vertex = target_vertices[l_connect_ind[count]];
-            auto Lr = l_restLengths[count] / glm::length(vertices[leg_left_ind] - target_vertex);
-            l_force += (1 - Lr) * (vertices[leg_left_ind] - target_vertex);
-            count++;
-        }
-        float d = 0.2;
-        glm::vec3 r_velocity = r_velocity_prev + d * -r_force  * delta;
-        glm::vec3 r_pos = r_position_prev + r_velocity_prev * delta;
-        glm::vec3 l_velocity = l_velocity_prev + d * -l_force * delta;
-        glm::vec3 l_pos = l_position_prev + l_velocity_prev * delta;
-        float force_r = glm::length(r_force); //Only use debug
-        float force_l = glm::length(l_force); //Only use debug
-        r_velocity_prev = r_velocity;
-        r_position_prev = r_pos;
-        l_velocity_prev = l_velocity;
-        l_position_prev = l_pos;
-        vertices[leg_right_ind] = r_pos;
-        vertices[leg_left_ind] = l_pos;
-        mesh_->SetVertices(vertices);
+        //glm::vec3 r_force = glm::vec3(0);
+        //glm::vec3 l_force = glm::vec3(0);
+        //auto vertices = mesh_->GetVertices();
+        //int count = 0;
+        //for (auto var :r_connect)
+        //{
+        //    auto target_vertices = (var.mesh_->GetVertices());
+        //    auto target_vertex = target_vertices[r_connect_ind[count]];
+        //    auto Lr = r_restLengths[count] / glm::length(vertices[leg_right_ind] - target_vertex);
+        //    r_force += (1 - Lr) * (vertices[leg_right_ind] - target_vertex);
+        //    count++;
+        //}
+        //count = 0;
+        //for (auto var : l_connect)
+        //{
+        //    auto target_vertices = (var.mesh_->GetVertices());
+        //    auto target_vertex = target_vertices[l_connect_ind[count]];
+        //    auto Lr = l_restLengths[count] / glm::length(vertices[leg_left_ind] - target_vertex);
+        //    l_force += (1 - Lr) * (vertices[leg_left_ind] - target_vertex);
+        //    count++;
+        //}
+        //float d = 0.2;
+        //glm::vec3 r_velocity = r_velocity_prev + d * -r_force  * delta;
+        //glm::vec3 r_pos = r_position_prev + r_velocity_prev * delta;
+        //glm::vec3 l_velocity = l_velocity_prev + d * -l_force * delta;
+        //glm::vec3 l_pos = l_position_prev + l_velocity_prev * delta;
+        //float force_r = glm::length(r_force); //Only use debug
+        //float force_l = glm::length(l_force); //Only use debug
+        //r_velocity_prev = r_velocity;
+        //r_position_prev = r_pos;
+        //l_velocity_prev = l_velocity;
+        //l_position_prev = l_pos;
+        //vertices[leg_right_ind] = r_pos;
+        //vertices[leg_left_ind] = l_pos;
+        //mesh_->SetVertices(vertices);
     }
 
     void MeshEntity::ConnectTo(game::MeshEntity &connected, game::MeshEntity& me)

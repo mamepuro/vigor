@@ -27,6 +27,11 @@ namespace game {
         glDrawArrays(GL_LINES, 0, size_);
     }
 
+    void Mesh::DrawPoints() const {
+        glBindVertexArray(vao_);
+        glDrawArrays(GL_POINTS, 0, size_);
+    }
+
     Mesh::Mesh(std::vector<glm::vec3>& vertices) : size_(vertices.size()) {
         vertices_ = vertices;
         glGenVertexArrays(1, &vao_);
@@ -146,15 +151,12 @@ namespace game {
         return mesh;
     }
 
-    //std::shared_ptr<Mesh> Mesh::CreateTestMesh()
-    //{
-    //    std::vector<glm::vec3> verices = 
-    //    {
-    //        //–Ê1
-    //        glm::vec3(-0.5, 0.5,0.5),
-    //        glm::vec3(-0.25, 0.5,0.5),
-    //        glm::vec3(-0.25, 0.5,0.5),
-    //    };
-    //}
+    std::shared_ptr<Mesh> Mesh::CreateTestMesh()
+    {
+        auto mesh = LoadObjMesh("testCloth.obj");
+        return mesh;
+    }
+
+    std::vector<unsigned int> Mesh::
 
 }  // namespace game

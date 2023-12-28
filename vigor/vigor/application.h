@@ -44,6 +44,7 @@ namespace game {
 		/// 稜線描画用のシェーダプログラム
 		/// </summary>
 		GLuint program_edge_;
+		GLuint program_points_;
 		GLuint model_loc_;
 		GLuint view_projection_loc_;
 		std::vector <Block> mesh_entities_;

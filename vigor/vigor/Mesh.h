@@ -38,6 +38,7 @@ namespace game {
 		 * ジオメトリを構築し、VBOとVAOを構築します。
 		 * 各種頂点情報は前から順に3つずつで一つの面を構成していきます。
 		 */
+		void DrawPoints() const;
 		Mesh(std::vector<glm::vec3>& vertices);
 		/**
 		 * @brief デストラクタ
