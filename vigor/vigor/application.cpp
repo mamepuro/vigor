@@ -1,13 +1,14 @@
 #include "application.h"
 #include "MeshEntity.h"
 #include "camera.h"
+
 //#include "imgui.h"
 //#include "imgui.cpp"
 //#include "imgui_impl_glfw.h"
 //#include "imgui_impl_opengl3.h"
 //#include "imgui_impl_glfw.cpp"
 //#include "imgui_impl_opengl3.cpp"
-//
+//A
 //#include "imgui.h"
 //#include "imgui_impl_glfw.h"
 //#include "imgui_impl_opengl3.h"
@@ -185,6 +186,7 @@ namespace game {
 					auto block = new Block(mesh, glm::vec3(setx, sety, 0.0f),
 						glm::vec3(0.0f), glm::vec3(1.0f), bid, 1, mesh->vertices_,
 						1, 5, 0, 3);
+					bid++;
 					mesh_entities_.emplace_back(*block);
 					std::cerr << "add block" << x <<"," << y << std::endl;
 
@@ -210,7 +212,7 @@ namespace game {
 					GL_UNSIGNED_BYTE,
 					&res
 				);
-				std::cerr << "P=" << res[2] << "," << y << std::endl;
+				std::cerr << "P=" << +res[2] << "," << y << std::endl;
 			}
 			if (currentKeyStateSpace != prevKeyState)
 			{
@@ -268,7 +270,7 @@ namespace game {
 		// ShaderƒvƒƒOƒ‰ƒ€‚Ìì¬
 		program_ = createProgram("shader.vert", "shader.frag");
 		program_edge_ = createProgram("shader.vert", "shader_edge.frag");
-		program_points_ = createProgram("shader_masspoint.vert", "shader_masspoint.frag")
+		program_points_ = createProgram("shader_masspoint.vert", "shader_masspoint.frag");
 		model_loc_ = glGetUniformLocation(program_, "Model");
 		id = glGetUniformLocation(program_, "code");
 		view_projection_loc_ = glGetUniformLocation(program_, "ViewProjection");
@@ -304,7 +306,7 @@ namespace game {
 		camera_ = std::make_unique<Camera>(
 			glm::vec3(0.0f, 0.0f, 10.0f), glm::vec3(0.0f), glm::radians(60.0f),
 			static_cast<float>(width) / height, 0.1f, 100.0f);
-		//IMGUI_CHECKVERSION();
+		IMGUI_CHECKVERSION();
 		//ImGui::CreateContext();
 		//ImGuiIO& io = ImGui::GetIO(); (void)io;
 

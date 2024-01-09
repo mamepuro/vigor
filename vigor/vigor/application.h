@@ -1,6 +1,8 @@
 #pragma once
 #ifndef OPENGL_PBR_MAP_APPLICATION_H_
 #define OPENGL_PBR_MAP_APPLICATION_H_
+#define IMGUI_IMPL_OPENGL_LOADER_GLAD
+#define IMGUI_DEFINE_MATH_OPERATORS
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
@@ -13,6 +15,14 @@
 #include "camera.h"
 #include "mesh.h"
 #include "block.h"
+
+
+#include "imgui.h"
+#include "imgui_impl_glfw.h"
+#include "imgui_impl_opengl3.h"
+//#include "imgui.cpp"
+//#include "imgui_impl_glfw.cpp"
+//#include "imgui_impl_opengl3.cpp"
 
 namespace game {
 

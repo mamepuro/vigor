@@ -157,6 +157,6 @@ namespace game {
         return mesh;
     }
 
-    std::vector<unsigned int> Mesh::
+   
 
 }  // namespace game
