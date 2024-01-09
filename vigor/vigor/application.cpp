@@ -268,6 +268,7 @@ namespace game {
 		// ShaderƒvƒƒOƒ‰ƒ€‚Ìì¬
 		program_ = createProgram("shader.vert", "shader.frag");
 		program_edge_ = createProgram("shader.vert", "shader_edge.frag");
+		program_points_ = createProgram("shader_masspoint.vert", "shader_masspoint.frag")
 		model_loc_ = glGetUniformLocation(program_, "Model");
 		id = glGetUniformLocation(program_, "code");
 		view_projection_loc_ = glGetUniformLocation(program_, "ViewProjection");
@@ -281,6 +282,7 @@ namespace game {
 			mesh_obj.push_back(mesh);
 			bid++;
 		}
+		auto testMesh = Mesh::CreateTestMesh();
 		auto block1 = new Block(mesh_obj[0], glm::vec3(0.0f, 0.0f, 0.0f),
 			glm::vec3(0.0f), glm::vec3(1.0f), 0, 1, mesh_obj[0]->vertices_,
 			1, 5, 0, 3);
