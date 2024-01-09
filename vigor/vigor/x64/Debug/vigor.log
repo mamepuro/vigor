@@ -1,4 +1,1 @@
-﻿  application.cpp
-C:\Users\ayata\OneDrive - 筑波大学\Develop\Dev\vigor\vigor\vigor\MeshEntity.h(35,30): warning C4305: '初期化中': 'double' から 'const float' へ切り詰めます。
-C:\Users\ayata\OneDrive - 筑波大学\Develop\Dev\vigor\vigor\vigor\application.cpp(307,25): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
-  vigor.vcxproj -> C:\Users\ayata\OneDrive - 筑波大学\Develop\Dev\vigor\vigor\x64\Debug\vigor.exe
+﻿  vigor.vcxproj -> C:\Users\ayata\OneDrive - 筑波大学\Develop\Dev\vigor\vigor\x64\Debug\vigor.exe

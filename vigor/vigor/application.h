@@ -46,9 +46,10 @@ namespace game {
 		GLuint program_edge_;
 		GLuint model_loc_;
 		GLuint view_projection_loc_;
+		GLuint id;
 		std::vector <Block> mesh_entities_;
 		std::unique_ptr<Camera> camera_;
-
+		int bid = 0;
 		/**
 		 * @brief ‰Šú‰»ˆ—
 		 * @return ³íI—¹‚È‚ç‚ÎtrueAˆÙíI—¹‚È‚ç‚Îfalse
