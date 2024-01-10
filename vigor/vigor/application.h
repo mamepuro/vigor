@@ -57,6 +57,7 @@ namespace game {
 		GLuint program_points_;
 		GLuint model_loc_;
 		GLuint view_projection_loc_;
+		GLuint program_spring_;
 		GLuint id;
 		std::vector <Block> mesh_entities_;
 		std::unique_ptr<Camera> camera_;

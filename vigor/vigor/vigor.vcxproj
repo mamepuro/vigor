@@ -145,8 +145,6 @@
     <ClCompile Include="application.cpp" />
     <ClCompile Include="Block.cpp" />
     <ClCompile Include="camera.cpp" />
-    <ClCompile Include="imgui_impl_glfw.cpp" />
-    <ClCompile Include="imgui_impl_opengl3.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="massPoint.cpp" />
     <ClCompile Include="Mesh.cpp" />
@@ -157,12 +155,9 @@
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\resource\imgui\imgui_impl_opengl3_loader.h" />
     <ClInclude Include="application.h" />
     <ClInclude Include="Block.h" />
     <ClInclude Include="camera.h" />
-    <ClInclude Include="imgui_impl_glfw.h" />
-    <ClInclude Include="imgui_impl_opengl3.h" />
     <ClInclude Include="massPoint.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="MeshEntity.h" />

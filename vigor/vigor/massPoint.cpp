@@ -34,7 +34,7 @@ namespace game {
 			//ƒGƒ‰[
 			k = 4.0f;
 		}
-		game::Spring* spring = new Spring(k,this, _another, restLength, springType);
+		game::Spring* spring = new Spring(k,this, _another, 1.0, springType);
 		spring->currentLength = restLength;
 		springs.push_back(spring);
 		block->SetSpring(spring);

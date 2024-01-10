@@ -17,9 +17,14 @@ namespace game{
 		float restLength;
 		//ƒoƒl’è”
 		float k;
+		std::vector<glm::vec3> vertices;
 		Spring(float _k, game::massPoint* _left, game::massPoint* _right, float restLength, springType springType);
+		void Draw();
 	private:
-
+		GLuint size_;
+		GLuint vertices_vbo_;
+		GLuint colors_vbo_;
+		GLuint vao_;
 	};
 
 }

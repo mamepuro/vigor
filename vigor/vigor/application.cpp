@@ -204,15 +204,17 @@ namespace game {
 				glfwGetCursorPos(window_, &x, &y);
 				int pix;
 				unsigned char res[4];
-				glReadPixels(
-					x, y,
-					1,
-					1,
-					GL_RGBA,
-					GL_UNSIGNED_BYTE,
-					&res
-				);
-				std::cerr << "P=" << +res[2] << "," << y << std::endl;
+				//glReadPixels(
+				//	x, y,
+				//	1,
+				//	1,
+				//	GL_RGBA,
+				//	GL_UNSIGNED_BYTE,
+				//	&res
+				//);
+				//std::cerr << "P=" << +res[2] << "," << y << std::endl;
+				std::cerr << "cursol" << x << "," << y << std::endl;
+
 			}
 			if (currentKeyStateSpace != prevKeyState)
 			{
@@ -271,6 +273,7 @@ namespace game {
 		program_ = createProgram("shader.vert", "shader.frag");
 		program_edge_ = createProgram("shader.vert", "shader_edge.frag");
 		program_points_ = createProgram("shader_masspoint.vert", "shader_masspoint.frag");
+		program_spring_ = createProgram("spring.vert", "spring.frag");
 		model_loc_ = glGetUniformLocation(program_, "Model");
 		id = glGetUniformLocation(program_, "code");
 		view_projection_loc_ = glGetUniformLocation(program_, "ViewProjection");
@@ -306,7 +309,7 @@ namespace game {
 		camera_ = std::make_unique<Camera>(
 			glm::vec3(0.0f, 0.0f, 10.0f), glm::vec3(0.0f), glm::radians(60.0f),
 			static_cast<float>(width) / height, 0.1f, 100.0f);
-		IMGUI_CHECKVERSION();
+		//IMGUI_CHECKVERSION();
 		//ImGui::CreateContext();
 		//ImGuiIO& io = ImGui::GetIO(); (void)io;
 
@@ -335,7 +338,7 @@ namespace game {
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
 		glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
+		//gluPickMatrix();
 		// リサイズ不可
 		glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
@@ -380,6 +383,7 @@ namespace game {
 		glUniformMatrix4fv(view_projection_loc_, 1, GL_FALSE, &view_projection[0][0]);
 
 		for (auto&& mesh_entity : mesh_entities_) {
+			mesh_entity.Simulate(0.1);
 			auto model = mesh_entity.GetModelMatrix();
 			glUniform1i(id, mesh_entity.ID);
 			glUniformMatrix4fv(model_loc_, 1, GL_FALSE, &model[0][0]);
@@ -395,11 +399,22 @@ namespace game {
 		glUniformMatrix4fv(view_projection_loc_, 1, GL_FALSE, &view_projection[0][0]);
 
 		for (auto&& mesh_entity : mesh_entities_) {
-			mesh_entity.Simulate(0.0001);
+			
 			auto model = mesh_entity.GetModelMatrix();
 			glUniformMatrix4fv(model_loc_, 1, GL_FALSE, &model[0][0]);
 			mesh_entity.mesh_->Draw(program_edge_);
 
+		}
+		glUseProgram(program_spring_);
+		glUniformMatrix4fv(view_projection_loc_, 1, GL_FALSE, &view_projection[0][0]);
+		for (auto&& mesh_entity : mesh_entities_)
+		{
+			for (auto spring : mesh_entity.springs)
+			{
+				auto model = mesh_entity.GetModelMatrix();
+				glUniformMatrix4fv(model_loc_, 1, GL_FALSE, &model[0][0]);
+				spring->Draw();
+			}
 		}
 	}
 
