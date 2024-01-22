@@ -9,6 +9,7 @@ namespace game {
 	{
 		prev_position = (block->positions)[vertexIndex];
 		prev_velocity = glm::vec3(0);
+		position = (block->positions)[vertexIndex];
 	};
 	void massPoint::AddSpring(game::massPoint* _another, springType springType)
 	{

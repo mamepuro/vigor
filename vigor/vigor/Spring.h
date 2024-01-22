@@ -20,6 +20,7 @@ namespace game{
 		std::vector<glm::vec3> vertices;
 		Spring(float _k, game::massPoint* _left, game::massPoint* _right, float restLength, springType springType);
 		void Draw();
+		glm::vec3 GetForce(massPoint* refmassPoint);
 	private:
 		GLuint size_;
 		GLuint vertices_vbo_;

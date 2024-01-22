@@ -36,13 +36,13 @@ namespace game {
 		//massPoints[2]->AddSpring(massPoints[1], sp);
 		//massPoints[3]->AddSpring(massPoints[5], sp);
 		//massPoints[5]->AddSpring(massPoints[3], sp);
-		//massPoints[3]->AddSpring(massPoints[4], sp);
-		//massPoints[4]->AddSpring(massPoints[3], sp);
+		massPoints[3]->AddSpring(massPoints[4], sp);
+		massPoints[4]->AddSpring(massPoints[3], sp);
 		//massPoints[4]->AddSpring(massPoints[5], sp);
 		//massPoints[5]->AddSpring(massPoints[4], sp);
 		//‹r‚ÌŠÔ‚Éƒoƒl‚ð“\‚é
-	    massPoints[1]->AddSpring(massPoints[5], springType::Leg);
-		massPoints[5]->AddSpring(massPoints[1], springType::Leg);
+	    //massPoints[1]->AddSpring(massPoints[5], springType::Leg);
+		//massPoints[5]->AddSpring(massPoints[1], springType::Leg);
 	};
 
 	void Block::SetSpring(game::Spring* _spring) {

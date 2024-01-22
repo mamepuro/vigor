@@ -33,6 +33,34 @@ namespace game {
 		glBindVertexArray(vao_);
 		glDrawArrays(GL_LINES, 0, size_);
 	}
+
+	glm::vec3 Spring::GetForce(massPoint* refMassPoint)
+	{
+		if (!(refMassPoint == left) &&
+			!(refMassPoint == right))
+		{
+			std::cout << "Error：存在しないMassPointを参照して力を計算しました" << std::endl;
+			return glm::vec3(0.0, 0.0, 0.0);
+		}
+
+		//距離の計算
+		float distance = glm::length(left->position - right->position);
+		//ばね定数等の考慮
+		/*本当ならF = sigma_j k(1 - L / |r|) * r */
+		float scaler = k * (distance - restLength); 
+
+		glm::vec3 direction = glm::normalize(right->position - left->position);
+		if (refMassPoint == left)
+		{
+			return scaler * direction;
+		}
+		else
+		{
+			//反対方向にする
+			return -scaler * direction;
+		}
+
+	}
 	
 
 

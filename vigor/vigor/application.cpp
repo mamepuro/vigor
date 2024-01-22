@@ -222,7 +222,8 @@ namespace game {
 				{
 					//mesh_entities_[0].ConnectTo(mesh_entities_[1], mesh_entities_[0]);
 					//mesh_entities_[0].Connect(&mesh_entities_[1]);
-					mesh_entities_[0].ConnectNext(&mesh_entities_[1]);
+					//mesh_entities_[0].ConnectNext(&mesh_entities_[1]);
+					mesh_entities_[0].TestBend();
 					//mesh_entities_[0].TestBend();
 					std::cerr << "connected 0 to 1" << std::endl;
 					prevKeyState = GLFW_PRESS;
@@ -291,12 +292,12 @@ namespace game {
 		auto block1 = new Block(mesh_obj[0], glm::vec3(0.0f, 0.0f, 0.0f),
 			glm::vec3(0.0f), glm::vec3(1.0f), 0, 1, mesh_obj[0]->vertices_,
 			1, 5, 0, 3);
-		auto block2 = new Block(mesh_obj[1], glm::vec3(0.0f, 0.0f, 0.0f),
-			glm::vec3(0.0f), glm::vec3(1.0f), 1, 1, mesh_obj[1]->vertices_,
-			1, 5, 0, 3);
+		//auto block2 = new Block(mesh_obj[1], glm::vec3(0.0f, 0.0f, 0.0f),
+		//	glm::vec3(0.0f), glm::vec3(1.0f), 1, 1, mesh_obj[1]->vertices_,
+		//	1, 5, 0, 3);
 		// MeshEntity�̍쐬
 		mesh_entities_.emplace_back(*block1);
-		mesh_entities_.emplace_back(*block2);
+		//mesh_entities_.emplace_back(*block2);
 		/*mesh_entities_.emplace_back(mesh_obj[2], glm::vec3(-0.0f, 0.0f, 0.0f),
 			glm::vec3(0.0f), glm::vec3(1.0f), 1, 5);*/
 		/*mesh_entities_[0].r_connect.push_back(mesh_entities_[0]);
@@ -383,7 +384,7 @@ namespace game {
 		glUniformMatrix4fv(view_projection_loc_, 1, GL_FALSE, &view_projection[0][0]);
 
 		for (auto&& mesh_entity : mesh_entities_) {
-			mesh_entity.Simulate(0.1);
+			mesh_entity.Simulate(0.01);
 			auto model = mesh_entity.GetModelMatrix();
 			glUniform1i(id, mesh_entity.ID);
 			glUniformMatrix4fv(model_loc_, 1, GL_FALSE, &model[0][0]);
