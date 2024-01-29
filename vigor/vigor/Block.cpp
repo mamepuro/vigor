@@ -13,7 +13,7 @@ namespace game {
 		int _legLeftInsertBlockID,
 		int _legRightInsertBlockID,
 		int _pocketLeftInsertBlockID,
-		int _pocketRightInsertBlockID) : game::MeshEntity(mesh, position, rotation, scale,1,5),
+		int _pocketRightInsertBlockID) : game::MeshEntity(mesh, position, rotation, scale, 1, 5),
 		ID(_ID),
 		union_ID(_union_ID),
 		positions(_positions),
@@ -29,26 +29,26 @@ namespace game {
 		}
 		springType sp = springType::Edge;
 		//massPoints[0]->AddSpring(massPoints[1], sp);
-		//massPoints[1]->AddSpring(massPoints[0], sp);
+		////massPoints[1]->AddSpring(massPoints[0], sp);
 		//massPoints[0]->AddSpring(massPoints[2], sp);
-		//massPoints[2]->AddSpring(massPoints[0], sp);
+		////massPoints[2]->AddSpring(massPoints[0], sp);
 		//massPoints[1]->AddSpring(massPoints[2], sp);
-		//massPoints[2]->AddSpring(massPoints[1], sp);
+		////massPoints[2]->AddSpring(massPoints[1], sp);
 		//massPoints[3]->AddSpring(massPoints[5], sp);
-		//massPoints[5]->AddSpring(massPoints[3], sp);
-		massPoints[3]->AddSpring(massPoints[4], sp);
-		massPoints[4]->AddSpring(massPoints[3], sp);
+		////massPoints[5]->AddSpring(massPoints[3], sp);
+		//massPoints[3]->AddSpring(massPoints[4], sp);
+		////massPoints[4]->AddSpring(massPoints[3], sp);
 		//massPoints[4]->AddSpring(massPoints[5], sp);
 		//massPoints[5]->AddSpring(massPoints[4], sp);
 		//‹r‚ÌŠÔ‚Éƒoƒl‚ð“\‚é
-	    //massPoints[1]->AddSpring(massPoints[5], springType::Leg);
+		massPoints[1]->AddSpring(massPoints[5], springType::Leg);
 		//massPoints[5]->AddSpring(massPoints[1], springType::Leg);
 	};
 
 	void Block::SetSpring(game::Spring* _spring) {
 		springs.push_back(_spring);
 	}
-	
+
 	void Block::Simulate(float delta) {
 		//Œ¸Š’è”
 		float d = 0.2;
@@ -60,7 +60,9 @@ namespace game {
 		auto verteices = mesh->GetVertices();
 		for (auto massPoint : massPoints)
 		{
-			for (auto spring : massPoint->springs)
+			massPoint->Update(0.01f);
+			verteices[massPoint->vertexIndex] = massPoint->position;
+			/*for (auto spring : massPoint->springs)
 			{
 				auto target_massPoint = spring->right;
 				auto target_vertex = (target_massPoint->prev_position);
@@ -71,7 +73,7 @@ namespace game {
 			position = massPoint->prev_position + massPoint->prev_velocity * delta;
 			massPoint->prev_velocity = velocity;
 			massPoint->prev_position = position;
-			verteices[massPoint->vertexIndex] = position;
+			verteices[massPoint->vertexIndex] = position;*/
 		}
 		mesh_->SetVertices(verteices);
 	}
@@ -110,7 +112,7 @@ namespace game {
 		}
 
 		mesh_->SetVertices(myVertex);
-		for(auto massPoint : massPoints)
+		for (auto massPoint : massPoints)
 		{
 			massPoint->prev_position = myVertex[massPoint->vertexIndex];
 		}
@@ -120,18 +122,18 @@ namespace game {
 		}
 		_target->mesh_->SetVertices(target_vertex);
 		springType sp = springType::Union;
-		massPoints[0]->AddSpring(_target->massPoints[0],sp);
-		massPoints[1]->AddSpring(_target->massPoints[1], sp);
-		massPoints[2]->AddSpring(_target->massPoints[2], sp);
-		massPoints[3]->AddSpring(_target->massPoints[3], sp);
-		massPoints[4]->AddSpring(_target->massPoints[4], sp);
-		massPoints[5]->AddSpring(_target->massPoints[5], sp);
-		_target->massPoints[0]->AddSpring(massPoints[0], sp);
-		_target->massPoints[1]->AddSpring(massPoints[1], sp);
-		_target->massPoints[2]->AddSpring(massPoints[2], sp);
-		_target->massPoints[3]->AddSpring(massPoints[3], sp);
-		_target->massPoints[4]->AddSpring(massPoints[4], sp);
-		_target->massPoints[5]->AddSpring(massPoints[5], sp);
+		//massPoints[0]->AddSpring(_target->massPoints[0], sp);
+		//massPoints[1]->AddSpring(_target->massPoints[1], sp);
+		//massPoints[2]->AddSpring(_target->massPoints[2], sp);
+		//massPoints[3]->AddSpring(_target->massPoints[3], sp);
+		//massPoints[4]->AddSpring(_target->massPoints[4], sp);
+		//massPoints[5]->AddSpring(_target->massPoints[5], sp);
+		//_target->massPoints[0]->AddSpring(massPoints[0], sp);
+		//_target->massPoints[1]->AddSpring(massPoints[1], sp);
+		//_target->massPoints[2]->AddSpring(massPoints[2], sp);
+		//_target->massPoints[3]->AddSpring(massPoints[3], sp);
+		//_target->massPoints[4]->AddSpring(massPoints[4], sp);
+		//_target->massPoints[5]->AddSpring(massPoints[5], sp);
 		//auto restLength = glm::length(target_vertex[leg_right_ind] - myVertex[leg_left_ind]);
 		//r_restLengths.push_back(restLength);
 		//l_restLengths.push_back(restLength);
@@ -220,25 +222,27 @@ namespace game {
 
 	void Block::TestBend() {
 		auto myVertex = mesh_->GetVertices();
-		auto length = glm::length(myVertex[pocket_right_ind] - myVertex[leg_right_ind]);
-		auto r_target_pos = r_pocketToLeg * (1 - tate_r) + myVertex[pocket_right_ind];
-		auto l_target_pos = l_pocketToLeg * (1 - tate_r) + myVertex[pocket_left_ind];
-		auto r_tToLeg = myVertex[leg_right_ind] - r_target_pos;
-		auto l_tToLeg = myVertex[leg_left_ind] - l_target_pos;
-		auto r_tToY = r_target_pos + glm::vec3(0, 1, 0) - r_target_pos;
-		auto l_tToY = l_target_pos + glm::vec3(0, 1, 0) - l_target_pos;
-		auto r_oh = glm::dot(r_tToLeg, r_tToY) / (glm::length(r_tToY) * glm::length(r_tToY)) * r_tToY;
-		auto l_oh = glm::dot(l_tToLeg, l_tToY) / (glm::length(l_tToY) * glm::length(l_tToY)) * l_tToY;
-		//myVertex[leg_right_ind] = glm::normalize(r_target_pos + r_oh - myVertex[pocket_right_ind]) * length;
-		//myVertex[leg_left_ind] = glm::normalize(l_target_pos + l_oh - myVertex[pocket_left_ind]) * length;
-		myVertex[leg_right_ind] = r_target_pos + r_oh * length;
-		myVertex[leg_left_ind] = l_target_pos + l_oh  * length;
-		r_pocketToLeg = myVertex[leg_right_ind] - myVertex[pocket_right_ind];
-		l_pocketToLeg = myVertex[leg_left_ind] - myVertex[pocket_left_ind];
+		//auto length = glm::length(myVertex[pocket_right_ind] - myVertex[leg_right_ind]);
+		//auto r_target_pos = r_pocketToLeg * (1 - tate_r) + myVertex[pocket_right_ind];
+		//auto l_target_pos = l_pocketToLeg * (1 - tate_r) + myVertex[pocket_left_ind];
+		//auto r_tToLeg = myVertex[leg_right_ind] - r_target_pos;
+		//auto l_tToLeg = myVertex[leg_left_ind] - l_target_pos;
+		//auto r_tToY = r_target_pos + glm::vec3(0, 1, 0) - r_target_pos;
+		//auto l_tToY = l_target_pos + glm::vec3(0, 1, 0) - l_target_pos;
+		//auto r_oh = glm::dot(r_tToLeg, r_tToY) / (glm::length(r_tToY) * glm::length(r_tToY)) * r_tToY;
+		//auto l_oh = glm::dot(l_tToLeg, l_tToY) / (glm::length(l_tToY) * glm::length(l_tToY)) * l_tToY;
+		////myVertex[leg_right_ind] = glm::normalize(r_target_pos + r_oh - myVertex[pocket_right_ind]) * length;
+		////myVertex[leg_left_ind] = glm::normalize(l_target_pos + l_oh - myVertex[pocket_left_ind]) * length;
+		//myVertex[leg_right_ind] = r_target_pos + r_oh * length;
+		//myVertex[leg_left_ind] = l_target_pos + l_oh * length;
+		//r_pocketToLeg = myVertex[leg_right_ind] - myVertex[pocket_right_ind];
+		//l_pocketToLeg = myVertex[leg_left_ind] - myVertex[pocket_left_ind];
+		myVertex[leg_right_ind].x += 0.1;
+		myVertex[leg_left_ind].x -= 0.1;
 		mesh_->SetVertices(myVertex);
 		for (auto massPoint : massPoints)
 		{
-			massPoint->prev_position = myVertex[massPoint->vertexIndex];
+			massPoint->position = myVertex[massPoint->vertexIndex];
 		}
 	}
 

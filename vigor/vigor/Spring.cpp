@@ -7,7 +7,7 @@ namespace game {
 		right(_right),
 		k(_k),
 		m_springType(springType)
-		
+
 	{
 		vertices.push_back(left->prev_position);
 		vertices.push_back(right->prev_position);
@@ -21,7 +21,7 @@ namespace game {
 		glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec3),
 			&vertices[0], GL_DYNAMIC_DRAW);
 		glEnableVertexAttribArray(0);
-		glVertexAttribPointer(0,3, GL_FLOAT, GL_FALSE, 0, static_cast<void *>(0));
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, static_cast<void*>(0));
 
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindVertexArray(0); //バインドを解除
@@ -47,8 +47,8 @@ namespace game {
 		float distance = glm::length(left->position - right->position);
 		//ばね定数等の考慮
 		/*本当ならF = sigma_j k(1 - L / |r|) * r */
-		float scaler = k * (distance - restLength); 
-
+		float scaler = k * (distance - restLength) * 1.0f;  //0.1 = ダンピング定数
+		//std::cout << "scaler = " << scaler << std::endl;
 		glm::vec3 direction = glm::normalize(right->position - left->position);
 		if (refMassPoint == left)
 		{
@@ -61,7 +61,7 @@ namespace game {
 		}
 
 	}
-	
+
 
 
 }

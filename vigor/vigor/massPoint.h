@@ -22,11 +22,12 @@ namespace game {
 		/// </summary>
 		int vertexIndex;
 		glm::vec3 prev_position;
+		glm::vec3 velocity;
 		glm::vec3 prev_velocity;
 		/// <summary>
 		/// この質点を持っているブロックへの参照
 		/// </summary>
-		Block *block;
+		Block* block;
 		/// <summary>
 		/// この質点に接続しているバネのコレクション
 		/// </summary>
@@ -40,17 +41,10 @@ namespace game {
 		/// <param name="_block"></param>
 		massPoint(int _blockID, int vertexIndex, Block* _block);
 		void AddSpring(game::massPoint* _another, springType springType);
-		
-		glm::vec3 CalculateForce() {
-			//重力は現時点では使わない
-			glm::vec3 gravity = glm::vec3(0, 0, 0);
-			glm::vec3 force = glm::vec3(0.0, 0.0, 0.0);
 
-			for (int i = 0; i < springs.size(); i++)
-			{
-				force += springs[i]->
-			}
-		}
+		glm::vec3 CalculateForce();
+
+		void Update(float delta);
 	private:
 	};
 }
