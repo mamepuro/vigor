@@ -43,6 +43,9 @@ namespace game {
         /// </summary>
         /// <param name="meshEntity">エンティティ</param>
         void ConnectTo(game::MeshEntity &meshEntity, game::MeshEntity &me);
+
+        void UpdateWorldPosition();
+
         /**
          * @brief シーン上の位置を返す
          * @return シーン上の位置
@@ -108,14 +111,26 @@ namespace game {
 
     private:
         glm::vec3 position_;
+        /// <summary>
+        /// ローカル座標(モデル座標)
+        /// </summary>
+        glm::vec3 local_position;
+        /// <summary>
+        /// ワールド座標(ワールド座標)
+        /// </summary>
+        glm::vec3 world_position;
         glm::vec3 rotation_;
         glm::vec3 scale_;
-        glm::mat4 model_matrix_;
+        
 
         /**
          * @brief Model行列を再計算する
          */
         void RecaluculateModelMatrix();
+       protected:
+           glm::mat4 model_matrix_;
+
+
     };
 
 }  // namespace game

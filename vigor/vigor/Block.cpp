@@ -17,6 +17,7 @@ namespace game {
 		ID(_ID),
 		union_ID(_union_ID),
 		positions(_positions),
+		local_position(_positions),
 		legLeftInsertBlockID(_legLeftInsertBlockID),
 		legRightInsertBlockID(_legRightInsertBlockID),
 		pocketLeftInsertBlockID(_pocketLeftInsertBlockID),
@@ -44,6 +45,15 @@ namespace game {
 		massPoints[1]->AddSpring(massPoints[5], springType::Leg);
 		//massPoints[5]->AddSpring(massPoints[1], springType::Leg);
 	};
+
+	void Block::UpdateWorldPosition()
+	{
+
+		for (int i = 0; i<local_position.max_size();)
+		{
+			world_position[i] = model_matrix;
+		}
+	}
 
 	void Block::SetSpring(game::Spring* _spring) {
 		springs.push_back(_spring);

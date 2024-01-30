@@ -2,6 +2,13 @@
 
 namespace game {
 
+	void MeshEntity::UpdateWorldPosition() {
+		for (auto point : world_position)
+		{
+
+		}
+	}
+
 	const glm::vec3 MeshEntity::GetPosition() const { return position_; }
 
 	void MeshEntity::SetPosition(const glm::vec3 position) {
