@@ -3,10 +3,10 @@
 namespace game {
 
 	void MeshEntity::UpdateWorldPosition() {
-		for (auto point : world_position)
-		{
+		//for (auto point : world_position)
+		//{
 
-		}
+		//}
 	}
 
 	const glm::vec3 MeshEntity::GetPosition() const { return position_; }

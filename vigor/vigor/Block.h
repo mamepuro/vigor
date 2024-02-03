@@ -17,10 +17,12 @@ namespace game {
 	class Spring;
 	class Block : public game::MeshEntity
 	{
+		static int mID;
 	public:
+		
 		/*脚の番号 1, 5 ポケットの番号0,3*/
 		//左は5,3 右は1,0とする
-		const int ID;
+		int ID;
 		int union_ID;
 		std::vector<glm::vec3> positions;
 		int legLeftInsertBlockID;
@@ -59,15 +61,19 @@ namespace game {
 		/// ブロックのワールド座標を更新する
 		/// </summary>
 		void UpdateWorldPosition();
+		/// <summary>
+		/// ブロックのローカル座標を更新する
+		/// </summary>
+		void UpdateLocalPosition();
+		/// <summary>
+		/// ブロックモデルの各頂点のワールド座標
+		/// </summary>
+		std::vector<glm::vec3> world_position;
 	private:
 		/// <summary>
 		/// ブロックモデルの各頂点ローカル座標(モデル座標)
 		/// </summary>
 		std::vector<glm::vec3> local_position;
-		/// <summary>
-		/// ブロックモデルの各頂点のワールド座標
-		/// </summary>
-		std::vector<glm::vec3> world_position;
 	};
 }
 

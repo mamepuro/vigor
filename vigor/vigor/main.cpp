@@ -8,6 +8,10 @@
 #include <string>
 #include <vector>
 #include "application.h"
+#include "Block.h"
+
+//ƒuƒƒbƒN‚ÌID‚ğ‰Šú‰»‚·‚é
+int game::Block::mID = 0;
 
 GLuint createProgram(std::string vertexShaderFile,
     std::string fragmentShaderFile) {

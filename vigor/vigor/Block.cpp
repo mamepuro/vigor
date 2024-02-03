@@ -14,7 +14,6 @@ namespace game {
 		int _legRightInsertBlockID,
 		int _pocketLeftInsertBlockID,
 		int _pocketRightInsertBlockID) : game::MeshEntity(mesh, position, rotation, scale, 1, 5),
-		ID(_ID),
 		union_ID(_union_ID),
 		positions(_positions),
 		local_position(_positions),
@@ -23,12 +22,18 @@ namespace game {
 		pocketLeftInsertBlockID(_pocketLeftInsertBlockID),
 		pocketRightInsertBlockID(_pocketRightInsertBlockID)
 	{
+		ID = mID;
+		mID++;
+		world_position = local_position;
+		UpdateWorldPosition();
 		for (int points = 0; points < _positions.size(); points++)
 		{
-			game::massPoint* massPoint = new game::massPoint(_ID, points, this);
+			game::massPoint* massPoint = new game::massPoint(ID, points, this);
 			massPoints.push_back(massPoint);
 		}
 		springType sp = springType::Edge;
+		
+		
 		//massPoints[0]->AddSpring(massPoints[1], sp);
 		////massPoints[1]->AddSpring(massPoints[0], sp);
 		//massPoints[0]->AddSpring(massPoints[2], sp);
@@ -49,9 +54,32 @@ namespace game {
 	void Block::UpdateWorldPosition()
 	{
 
-		for (int i = 0; i<local_position.max_size();)
+		for (int i = 0; i<local_position.size();i++)
 		{
-			world_position[i] = model_matrix;
+			//同次座標系に変換(4つめの要素(w)は1とする)
+			// 注:w=1 でないと平行移動を考慮した計算にならない
+			//TODO: テストしておくこと
+			glm::vec4 vec4_local = glm::vec4(local_position[i], 1);
+			vec4_local = model_matrix_ * vec4_local;
+			world_position[i] = glm::vec3(vec4_local);
+			if (local_position.size() == massPoints.size())
+			{
+				//質点の座標を更新する
+				massPoints[i]->world_position = world_position[i];
+			}
+		}
+		UpdateLocalPosition();
+	}
+
+	void Block::UpdateLocalPosition()
+	{
+		//同次座標系に変換(4つめの要素(w)は1とする)
+		// 注:w=1 でないと平行移動を考慮した計算にならない
+		//TODO: テストしておくこと
+		for (int i = 0; i < world_position.size(); i++)
+		{
+			glm::vec4 vec4_world = glm::vec4(world_position[i], 1);
+			local_position[i] = glm::inverse(model_matrix_) * vec4_world;
 		}
 	}
 
@@ -60,6 +88,7 @@ namespace game {
 	}
 
 	void Block::Simulate(float delta) {
+		UpdateWorldPosition();
 		//減衰定数
 		float d = 0.2;
 		glm::vec3 force = glm::vec3(0);
@@ -71,7 +100,8 @@ namespace game {
 		for (auto massPoint : massPoints)
 		{
 			massPoint->Update(0.01f);
-			verteices[massPoint->vertexIndex] = massPoint->position;
+			world_position[massPoint->vertexIndex] = massPoint->position;
+			//verteices[massPoint->vertexIndex] = massPoint->position;
 			/*for (auto spring : massPoint->springs)
 			{
 				auto target_massPoint = spring->right;
@@ -85,7 +115,9 @@ namespace game {
 			massPoint->prev_position = position;
 			verteices[massPoint->vertexIndex] = position;*/
 		}
-		mesh_->SetVertices(verteices);
+		//world_position = verteices;
+		UpdateLocalPosition();
+		mesh_->SetVertices(local_position);
 	}
 
 	void Block::Connect(Block* _target)

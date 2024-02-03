@@ -10,12 +10,12 @@ namespace game {
 		prev_position = (block->positions)[vertexIndex];
 		prev_velocity = glm::vec3(0, 0, 0);
 		velocity = glm::vec3(0, 0, 0);;
-		position = (block->positions)[vertexIndex];
+		position = (block->world_position)[vertexIndex];
 	};
 	void massPoint::AddSpring(game::massPoint* _another, springType springType)
 	{
-		glm::vec3 initial_position = (_another->block->positions)[_another->vertexIndex];
-		glm::vec3 myInitialPosition = (block->positions)[vertexIndex];
+		glm::vec3 initial_position = (_another->position);
+		glm::vec3 myInitialPosition = position;
 		float restLength = glm::length(initial_position - myInitialPosition);
 		float k = 0;
 

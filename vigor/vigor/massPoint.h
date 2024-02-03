@@ -32,7 +32,15 @@ namespace game {
 		/// この質点に接続しているバネのコレクション
 		/// </summary>
 		std::vector<game::Spring*> springs;
+		/// <summary>
+		/// 注意：旧仕様！削除予定のメンバ変数
+		/// 質点の座標
+		/// </summary>
 		glm::vec3 position;
+		/// <summary>
+		/// 質点のワールド座標
+		/// </summary>
+		glm::vec3 world_position;
 		/// <summary>
 		/// コンストラクタ
 		/// </summary>

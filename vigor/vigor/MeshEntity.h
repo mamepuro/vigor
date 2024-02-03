@@ -127,8 +127,8 @@ namespace game {
          * @brief Models—ñ‚ğÄŒvZ‚·‚é
          */
         void RecaluculateModelMatrix();
-       protected:
-           glm::mat4 model_matrix_;
+    protected:
+        glm::mat4 model_matrix_;
 
 
     };

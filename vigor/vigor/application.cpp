@@ -344,6 +344,7 @@ namespace game {
 		const GLuint width = 960;
 		const GLuint height = 540;
 
+
 		if (!InitWindow(width, height)) {
 			std::cerr << "Error: InitWindow" << std::endl;
 			return false;
@@ -437,7 +438,7 @@ namespace game {
 			else
 			{
 			}
-			block1->TestBend();
+			//block1->TestBend();
 		}
 		//auto block1 = new Block(mesh_obj[0], glm::vec3(0.0f, 0.0f, 0.0f),
 		//	glm::vec3(0.0f), glm::vec3(0.5f), 0, 1, mesh_obj[0]->vertices_,

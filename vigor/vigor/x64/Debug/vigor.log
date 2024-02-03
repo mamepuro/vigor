@@ -4,32 +4,9 @@ C:\dev\vigor\vigor\vigor\application.cpp(136,38): warning C4305: '初期化中':
 C:\dev\vigor\vigor\vigor\application.cpp(249,20): warning C4305: '初期化中': 'double' から 'float' へ切り詰めます。
 C:\dev\vigor\vigor\vigor\application.cpp(226,19): warning C4101: 'res': ローカル変数は 1 度も使われていません。
 C:\dev\vigor\vigor\vigor\application.cpp(225,9): warning C4101: 'pix': ローカル変数は 1 度も使われていません。
-C:\dev\vigor\vigor\vigor\application.cpp(372,37): warning C4305: '初期化中': 'double' から 'float' へ切り詰めます。
-C:\dev\vigor\vigor\vigor\application.cpp(373,38): warning C4305: '初期化中': 'double' から 'float' へ切り詰めます。
-C:\dev\vigor\vigor\vigor\application.cpp(557,29): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
-  Block.cpp
-C:\dev\vigor\vigor\vigor\MeshEntity.h(35,21): warning C4305: '初期化中': 'double' から 'const float' へ切り詰めます。
-C:\dev\vigor\vigor\vigor\Block.cpp(54,16): warning C4305: '初期化中': 'double' から 'float' へ切り詰めます。
-C:\dev\vigor\vigor\vigor\Block.cpp(240,35): warning C4305: '+=': 'double' から 'T' へ切り詰めます。
-          with
-          [
-              T=float
-          ]
-C:\dev\vigor\vigor\vigor\Block.cpp(241,34): warning C4305: '-=': 'double' から 'T' へ切り詰めます。
-          with
-          [
-              T=float
-          ]
-  camera.cpp
-  KeyType.cpp
-  main.cpp
-C:\dev\vigor\vigor\vigor\MeshEntity.h(35,21): warning C4305: '初期化中': 'double' から 'const float' へ切り詰めます。
-  massPoint.cpp
-C:\dev\vigor\vigor\vigor\MeshEntity.h(35,21): warning C4305: '初期化中': 'double' から 'const float' へ切り詰めます。
-  Spring.cpp
-C:\dev\vigor\vigor\vigor\MeshEntity.h(35,21): warning C4305: '初期化中': 'double' から 'const float' へ切り詰めます。
-C:\dev\vigor\vigor\vigor\Spring.cpp(14,26): warning C4267: '=': 'size_t' から 'GLuint' に変換しました。データが失われているかもしれません。
-  コードを生成中...
+C:\dev\vigor\vigor\vigor\application.cpp(373,37): warning C4305: '初期化中': 'double' から 'float' へ切り詰めます。
+C:\dev\vigor\vigor\vigor\application.cpp(374,38): warning C4305: '初期化中': 'double' から 'float' へ切り詰めます。
+C:\dev\vigor\vigor\vigor\application.cpp(558,29): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
 glew32s.lib(glew.obj) : warning LNK4099: PDB '' が 'glew32s.lib(glew.obj)' で、または '' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
 LINK : warning LNK4098: defaultlib 'LIBCMT' は他のライブラリの使用と競合しています。/NODEFAULTLIB:library を使用してください。
   vigor.vcxproj -> C:\dev\vigor\vigor\x64\Debug\vigor.exe
