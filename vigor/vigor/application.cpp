@@ -405,40 +405,58 @@ namespace game {
 			{
 				auto  right = &mesh_entities_[i + 10];
 				auto  left = &mesh_entities_[i + 9];
+				auto right_nextTo = &mesh_entities_[i + 1];
 				if (i < 10)
 				{
-
 					block1->massPoints[block1->leg_left_ind]->AddSpring(
 						right->massPoints[right->pocket_right_ind], springType::Union);
+					block1->r_connect.push_back(right_nextTo);
 
 				}
 				if (i > 0)
 				{
+					auto left_nextTo = &mesh_entities_[i - 1];
 					block1->massPoints[block1->leg_right_ind]->AddSpring(
 						left->massPoints[right->pocket_left_ind], springType::Union);
+					block1->l_connect.push_back(left_nextTo);
 				}
 			}
 			else if (i < 21)
 			{
 				auto  right = &mesh_entities_[i + 9];
 				auto  left = &mesh_entities_[i + 8];
+				auto right_nextTo = &mesh_entities_[i + 1];
+				auto left_nextTo = &mesh_entities_[i - 1];
 				if (i < 19)
 				{
 
 					block1->massPoints[block1->leg_left_ind]->AddSpring(
 						right->massPoints[right->pocket_right_ind], springType::Union);
+					block1->r_connect.push_back(right_nextTo);
 
 				}
 				if (i > 10)
 				{
 					block1->massPoints[block1->leg_right_ind]->AddSpring(
 						left->massPoints[right->pocket_left_ind], springType::Union);
+					block1->l_connect.push_back(left_nextTo);
 				}
 			}
 			else
 			{
+				if (i < 30)
+				{
+					auto right_nextTo = &mesh_entities_[i + 1];
+					block1->r_connect.push_back(right_nextTo);
+
+				}
+				if (i > 21)
+				{
+					auto left_nextTo = &mesh_entities_[i - 1];
+					block1->l_connect.push_back(left_nextTo);
+				}
 			}
-			//block1->TestBend();
+			block1->TestBend();
 		}
 		//auto block1 = new Block(mesh_obj[0], glm::vec3(0.0f, 0.0f, 0.0f),
 		//	glm::vec3(0.0f), glm::vec3(0.5f), 0, 1, mesh_obj[0]->vertices_,
@@ -556,6 +574,7 @@ namespace game {
 
 		for (auto&& mesh_entity : mesh_entities_) {
 			mesh_entity.Simulate(0.01);
+			mesh_entity.CheckCollide();
 			auto model = mesh_entity.GetModelMatrix();
 			glUniform1i(id, mesh_entity.ID);
 			glUniformMatrix4fv(model_loc_, 1, GL_FALSE, &model[0][0]);

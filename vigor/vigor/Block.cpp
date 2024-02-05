@@ -32,8 +32,8 @@ namespace game {
 			massPoints.push_back(massPoint);
 		}
 		springType sp = springType::Edge;
-		
-		
+
+
 		//massPoints[0]->AddSpring(massPoints[1], sp);
 		////massPoints[1]->AddSpring(massPoints[0], sp);
 		//massPoints[0]->AddSpring(massPoints[2], sp);
@@ -54,7 +54,7 @@ namespace game {
 	void Block::UpdateWorldPosition()
 	{
 
-		for (int i = 0; i<local_position.size();i++)
+		for (int i = 0; i < local_position.size(); i++)
 		{
 			//同次座標系に変換(4つめの要素(w)は1とする)
 			// 注:w=1 でないと平行移動を考慮した計算にならない
@@ -76,10 +76,131 @@ namespace game {
 		//同次座標系に変換(4つめの要素(w)は1とする)
 		// 注:w=1 でないと平行移動を考慮した計算にならない
 		//TODO: テストしておくこと
+		// OK
 		for (int i = 0; i < world_position.size(); i++)
 		{
 			glm::vec4 vec4_world = glm::vec4(world_position[i], 1);
 			local_position[i] = glm::inverse(model_matrix_) * vec4_world;
+			if (local_position.size() == massPoints.size())
+			{
+				//質点の座標を更新する
+				massPoints[i]->world_position = world_position[i];
+			}
+		}
+	}
+
+	void Block::CheckCollide() {
+		//T1 = 自分の面
+		//T2 = 相手の面
+		//v1_0 = 自分の面の頂点0
+		glm::vec3 v1_0, v1_1, v1_2, v2_0, v2_1, v2_2;
+		glm::vec3 n1, n2;
+		float d1, d2, d1_0, d1_1, d1_2, d2_0, d2_1, d2_2;
+		//最初に右の面から調査する
+		v1_0 = world_position[0];
+		v1_1 = world_position[1];
+		v1_2 = world_position[2];
+		n1 = glm::cross(v1_2 - v1_0, v1_1 - v1_0);
+		d1 = glm::dot(-n1, v1_0);
+		for (int i = 0; i < r_connect.size(); i++)
+		{
+			//相手は左の面を見る
+			v2_0 = r_connect[i]->world_position[3];
+			v2_1 = r_connect[i]->world_position[4];
+			v2_2 = r_connect[i]->world_position[5];
+			n2 = glm::cross(v2_2 - v2_0, v2_1 - v2_0);
+			d2 = glm::dot(-n2, v2_0);
+
+			//ここから交差判定
+			d1_0 = glm::dot(n2, v1_0) + d2;
+			d1_1 = glm::dot(n2, v1_1) + d2;
+			d1_2 = glm::dot(n2, v1_2) + d2;
+			d2_0 = glm::dot(n1, v2_0) + d1;
+			d2_1 = glm::dot(n1, v2_1) + d1;
+			d2_2 = glm::dot(n1, v2_2) + d1;
+
+			//全てのdの符号が一致する場合は衝突していないので以降の計算はしない
+			if ((d1_0 > 0 && d1_1 > 0 && d1_2 > 0)
+				|| (d1_0 < 0 && d1_1 < 0 && d1_2 < 0))
+			{
+				continue;
+			}
+
+			//法線を正規化する
+			n1 = glm::normalize(n1);
+			n2 = glm::normalize(n2);
+
+			float distance1, distance2;
+			glm::vec3 p1_1, p1_2, p2_1, p2_2;
+			//v1_0とv1_1が同じ側にあるとき
+			if (((d1_0 > 0 && d1_1 > 0)
+				|| (d1_0 < 0 && d1_1 < 0)))
+			{
+				distance1 = glm::dot(v2_0 - v1_0, n2);
+				distance2 = glm::dot(v2_0 - v1_2, n2);
+				p1_1 = v1_2 + (v1_0 - v1_2) * (distance2 / (distance1 + distance2));
+				distance1 = glm::dot(v2_0 - v1_1, n2);
+				p1_2 = v1_2 + (v1_1 - v1_2) * (distance2 / (distance1 + distance2));
+			}
+			//v1_1とv1_2が同じ側にあるとき
+			else if ((d1_1 > 0 && d1_2 > 0)
+				|| (d1_1 < 0 && d1_2 < 0))
+			{
+				distance1 = glm::dot(v2_0 - v1_1, n2);
+				distance2 = glm::dot(v2_0 - v1_0, n2);
+				p1_1 = v1_0 + (v1_1 - v1_0) * (distance2 / (distance1 + distance2));
+				distance1 = glm::dot(v2_0 - v1_2, n2);
+				p1_2 = v1_0 + (v1_2 - v1_0) * (distance2 / (distance1 + distance2));
+			}
+			else
+			{
+				distance1 = glm::dot(v2_0 - v1_0, n2);
+				distance2 = glm::dot(v2_0 - v1_1, n2);
+				p1_1 = v1_1 + (v1_0 - v1_1) * (distance2 / (distance1 + distance2));
+				distance1 = glm::dot(v2_0 - v1_2, n2);
+				p1_2 = v1_1 + (v1_2 - v1_1) * (distance2 / (distance1 + distance2));
+			}
+
+			//T2側でも同様の計算をする
+			if (((d2_0 > 0 && d2_1 > 0)
+				|| (d2_0 < 0 && d2_1 < 0)))
+			{
+				distance1 = glm::dot(v1_0 - v2_0, n1);
+				distance2 = glm::dot(v1_0 - v2_2, n1);
+				p2_1 = v2_2 + (v2_0 - v2_2) * (distance2 / (distance1 + distance2));
+				distance1 = glm::dot(v1_0 - v2_1, n1);
+				p2_2 = v2_2 + (v2_1 - v2_2) * (distance2 / (distance1 + distance2));
+			}
+			//v1_1とv1_2が同じ側にあるとき
+			else if ((d2_1 > 0 && d2_2 > 0)
+				|| (d2_1 < 0 && d2_2 < 0))
+			{
+				distance1 = glm::dot(v1_0 - v2_1, n1);
+				distance2 = glm::dot(v1_0 - v2_0, n1);
+				p2_1 = v2_0 + (v2_1 - v2_0) * (distance2 / (distance1 + distance2));
+				distance1 = glm::dot(v1_0 - v2_2, n1);
+				p2_2 = v2_0 + (v2_2 - v2_0) * (distance2 / (distance1 + distance2));
+			}
+			else
+			{
+				distance1 = glm::dot(v1_0 - v2_0, n1);
+				distance2 = glm::dot(v1_0 - v2_1, n1);
+				p2_1 = v2_1 + (v2_0 - v2_1) * (distance2 / (distance1 + distance2));
+				distance1 = glm::dot(v1_0 - v2_2, n1);
+				p2_2 = v2_1 + (v2_2 - v2_1) * (distance2 / (distance1 + distance2));
+			}
+			glm::vec3 test1 = p2_1 - p2_2;
+			glm::vec3 test2 = p1_1 - p1_2;
+			float x = glm::dot(test1, test2);
+			float k = 0;
+			float dist = glm::distance(v1_1, v2_2);
+			float l = glm::length(v1_1 - v2_2);
+			world_position[1].x -= dist;
+			r_connect[i]->world_position[5].x += dist;
+			UpdateLocalPosition();
+			r_connect[i]->UpdateLocalPosition();
+			mesh_->SetVertices(local_position);
+			r_connect[i]->mesh_->SetVertices(r_connect[i]->world_position);
 		}
 	}
 
@@ -114,6 +235,7 @@ namespace game {
 			massPoint->prev_velocity = velocity;
 			massPoint->prev_position = position;
 			verteices[massPoint->vertexIndex] = position;*/
+
 		}
 		//world_position = verteices;
 		UpdateLocalPosition();
@@ -263,7 +385,7 @@ namespace game {
 	};
 
 	void Block::TestBend() {
-		auto myVertex = mesh_->GetVertices();
+		auto myVertex = world_position;
 		//auto length = glm::length(myVertex[pocket_right_ind] - myVertex[leg_right_ind]);
 		//auto r_target_pos = r_pocketToLeg * (1 - tate_r) + myVertex[pocket_right_ind];
 		//auto l_target_pos = l_pocketToLeg * (1 - tate_r) + myVertex[pocket_left_ind];

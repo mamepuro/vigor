@@ -19,9 +19,10 @@ namespace game {
 	{
 		static int mID;
 	public:
-		
+
 		/*脚の番号 1, 5 ポケットの番号0,3*/
 		//左は5,3 右は1,0とする
+
 		int ID;
 		int union_ID;
 		std::vector<glm::vec3> positions;
@@ -29,7 +30,13 @@ namespace game {
 		int legRightInsertBlockID;
 		int pocketLeftInsertBlockID;
 		int pocketRightInsertBlockID;
+		/// <summary>
+		/// 右側のブロックの面と衝突判定する面(現在は左の面と衝突判定する)
+		/// </summary>
 		std::vector<Block*> r_connect;
+		/// <summary>
+		/// 左側の面と衝突判定する面
+		/// </summary>
 		std::vector<Block*> l_connect;
 		/// <summary>
 		/// ブロックが持つ質点のコレクション
@@ -65,6 +72,10 @@ namespace game {
 		/// ブロックのローカル座標を更新する
 		/// </summary>
 		void UpdateLocalPosition();
+		/// <summary>
+		/// ブロックの面同士の交差を判定する
+		/// </summary>
+		void CheckCollide();
 		/// <summary>
 		/// ブロックモデルの各頂点のワールド座標
 		/// </summary>

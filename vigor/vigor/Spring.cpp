@@ -9,8 +9,8 @@ namespace game {
 		m_springType(springType)
 
 	{
-		vertices.push_back(left->prev_position);
-		vertices.push_back(right->prev_position);
+		vertices.push_back(left->position);
+		vertices.push_back(right->position);
 		size_ = vertices.size();
 		glGenVertexArrays(1, &vao_);
 		glBindVertexArray(vao_);
