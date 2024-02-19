@@ -80,11 +80,12 @@ namespace game {
 		/// ブロックモデルの各頂点のワールド座標
 		/// </summary>
 		std::vector<glm::vec3> world_position;
+		std::vector<glm::vec3> local_position;
 	private:
 		/// <summary>
 		/// ブロックモデルの各頂点ローカル座標(モデル座標)
 		/// </summary>
-		std::vector<glm::vec3> local_position;
+
 	};
 }
 

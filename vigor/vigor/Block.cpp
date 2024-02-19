@@ -196,7 +196,8 @@ namespace game {
 			float dist = glm::distance(v1_1, v2_2);
 			float l = glm::length(v1_1 - v2_2);
 			world_position[1].x -= dist;
-			r_connect[i]->world_position[5].x += dist;
+			r_connect[i]->world_position[5].x
+				+= dist;
 			UpdateLocalPosition();
 			r_connect[i]->UpdateLocalPosition();
 			mesh_->SetVertices(local_position);

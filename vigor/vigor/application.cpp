@@ -371,41 +371,50 @@ namespace game {
 		float x_init = 0;
 		float y_init = 0;
 		float xwidth = 0.573896 - 0.016184;
-		float xheight = 2.000000 - 0.079334;
+		float xheight = 2.000000 - 0.079334 - 1.3;
 		auto testMesh = Mesh::CreateTestMesh();
-		for (int i = 0; i < 31; i++)
+		for (int i = 0; i < 3; i++)
 		{
-			if (i < 11)
+			if (i < 2)
 			{
-				auto block1 = new Block(mesh_obj[i], glm::vec3(i * xwidth, 0.0f, 0.0f),
-					glm::vec3(0.0f), glm::vec3(0.5f), 0, 1, mesh_obj[i]->vertices_,
+				auto block1 = new Block(mesh_obj[i], glm::vec3(xwidth / 2, 0.0f, 0.0f),
+					glm::vec3(0.0f), glm::vec3(1.f), 0, 1, mesh_obj[i]->vertices_,
 					5, 1, 3, 0);
 				mesh_entities_.emplace_back(*block1);
 			}
-			else if (i < 21)
+			else if (i < 3)
 			{
-				auto block1 = new Block(mesh_obj[i], glm::vec3((i - 11) * xwidth + xwidth / 2, xheight / 2, 0.0f),
-					glm::vec3(0.0f), glm::vec3(0.5f), 0, 1, mesh_obj[i]->vertices_,
+				auto block1 = new Block(mesh_obj[i], glm::vec3((i - 2) * xwidth + xwidth / 2, xheight / 2, 0.0f),
+					glm::vec3(0.0f), glm::vec3(1.f), 0, 1, mesh_obj[i]->vertices_,
 					5, 1, 3, 0);
 				mesh_entities_.emplace_back(*block1);
 			}
-			else
-			{
-				auto block1 = new Block(mesh_obj[i], glm::vec3((i - 20) * xwidth, xheight, 0.0f),
-					glm::vec3(0.0f), glm::vec3(0.5f), 0, 1, mesh_obj[i]->vertices_,
-					5, 1, 3, 0);
-				mesh_entities_.emplace_back(*block1);
-			}
-
 		}
-		for (int i = 0; i < 31; i++)
+
+		for (int i = 0; i < 3; i++)
 		{
 			auto block1 = &mesh_entities_[i];
-			if (i < 11)
+			if (i < 2)
 			{
-				auto  right = &mesh_entities_[i + 10];
-				auto  left = &mesh_entities_[i + 9];
+				auto  right = &mesh_entities_[2];
+				auto  left = &mesh_entities_[2];
 				auto right_nextTo = &mesh_entities_[i + 1];
+				//block1->SetPosition(glm::vec3(xwidth / 2, 0, 0));
+				if (i > 0)
+				{
+					//block1->SetPosition(glm::vec3(4 * xwidth / 2, 0, 0));
+					block1->world_position[block1->leg_left_ind] = right->world_position[block1->leg_right_ind];
+					block1->world_position[block1->leg_right_ind] += glm::vec3(0.5, 0, 0);
+					block1->UpdateLocalPosition();
+					block1->mesh_->SetVertices(block1->local_position);
+				}
+				else
+				{
+					block1->world_position[block1->leg_right_ind] = right->world_position[block1->leg_left_ind];
+					block1->world_position[block1->leg_left_ind] -= glm::vec3(0.5, 0, 0);
+					block1->UpdateLocalPosition();
+					block1->mesh_->SetVertices(block1->local_position);
+				}
 				if (i < 10)
 				{
 					block1->massPoints[block1->leg_left_ind]->AddSpring(
@@ -421,43 +430,94 @@ namespace game {
 					block1->l_connect.push_back(left_nextTo);
 				}
 			}
-			else if (i < 21)
-			{
-				auto  right = &mesh_entities_[i + 9];
-				auto  left = &mesh_entities_[i + 8];
-				auto right_nextTo = &mesh_entities_[i + 1];
-				auto left_nextTo = &mesh_entities_[i - 1];
-				if (i < 19)
-				{
-
-					block1->massPoints[block1->leg_left_ind]->AddSpring(
-						right->massPoints[right->pocket_right_ind], springType::Union);
-					block1->r_connect.push_back(right_nextTo);
-
-				}
-				if (i > 10)
-				{
-					block1->massPoints[block1->leg_right_ind]->AddSpring(
-						left->massPoints[right->pocket_left_ind], springType::Union);
-					block1->l_connect.push_back(left_nextTo);
-				}
-			}
-			else
-			{
-				if (i < 30)
-				{
-					auto right_nextTo = &mesh_entities_[i + 1];
-					block1->r_connect.push_back(right_nextTo);
-
-				}
-				if (i > 21)
-				{
-					auto left_nextTo = &mesh_entities_[i - 1];
-					block1->l_connect.push_back(left_nextTo);
-				}
-			}
-			block1->TestBend();
+			//block1->TestBend();
 		}
+
+		//for (int i = 0; i < 31; i++)
+		//{
+		//	if (i < 11)
+		//	{
+		//		auto block1 = new Block(mesh_obj[i], glm::vec3(i * xwidth, 0.0f, 0.0f),
+		//			glm::vec3(0.0f), glm::vec3(0.5f), 0, 1, mesh_obj[i]->vertices_,
+		//			5, 1, 3, 0);
+		//		mesh_entities_.emplace_back(*block1);
+		//	}
+		//	else if (i < 21)
+		//	{
+		//		auto block1 = new Block(mesh_obj[i], glm::vec3((i - 11) * xwidth + xwidth / 2, xheight / 2, 0.0f),
+		//			glm::vec3(0.0f), glm::vec3(0.5f), 0, 1, mesh_obj[i]->vertices_,
+		//			5, 1, 3, 0);
+		//		mesh_entities_.emplace_back(*block1);
+		//	}
+		//	else
+		//	{
+		//		auto block1 = new Block(mesh_obj[i], glm::vec3((i - 20) * xwidth, xheight, 0.0f),
+		//			glm::vec3(0.0f), glm::vec3(0.5f), 0, 1, mesh_obj[i]->vertices_,
+		//			5, 1, 3, 0);
+		//		mesh_entities_.emplace_back(*block1);
+		//	}
+
+		//}
+		//for (int i = 0; i < 31; i++)
+		//{
+		//	auto block1 = &mesh_entities_[i];
+		//	if (i < 11)
+		//	{
+		//		auto  right = &mesh_entities_[i + 10];
+		//		auto  left = &mesh_entities_[i + 9];
+		//		auto right_nextTo = &mesh_entities_[i + 1];
+		//		if (i < 10)
+		//		{
+		//			block1->massPoints[block1->leg_left_ind]->AddSpring(
+		//				right->massPoints[right->pocket_right_ind], springType::Union);
+		//			block1->r_connect.push_back(right_nextTo);
+
+		//		}
+		//		if (i > 0)
+		//		{
+		//			auto left_nextTo = &mesh_entities_[i - 1];
+		//			block1->massPoints[block1->leg_right_ind]->AddSpring(
+		//				left->massPoints[right->pocket_left_ind], springType::Union);
+		//			block1->l_connect.push_back(left_nextTo);
+		//		}
+		//	}
+		//	else if (i < 21)
+		//	{
+		//		auto  right = &mesh_entities_[i + 9];
+		//		auto  left = &mesh_entities_[i + 8];
+		//		auto right_nextTo = &mesh_entities_[i + 1];
+		//		auto left_nextTo = &mesh_entities_[i - 1];
+		//		if (i < 19)
+		//		{
+
+		//			block1->massPoints[block1->leg_left_ind]->AddSpring(
+		//				right->massPoints[right->pocket_right_ind], springType::Union);
+		//			block1->r_connect.push_back(right_nextTo);
+
+		//		}
+		//		if (i > 10)
+		//		{
+		//			block1->massPoints[block1->leg_right_ind]->AddSpring(
+		//				left->massPoints[right->pocket_left_ind], springType::Union);
+		//			block1->l_connect.push_back(left_nextTo);
+		//		}
+		//	}
+		//	else
+		//	{
+		//		if (i < 30)
+		//		{
+		//			auto right_nextTo = &mesh_entities_[i + 1];
+		//			block1->r_connect.push_back(right_nextTo);
+
+		//		}
+		//		if (i > 21)
+		//		{
+		//			auto left_nextTo = &mesh_entities_[i - 1];
+		//			block1->l_connect.push_back(left_nextTo);
+		//		}
+		//	}
+		//	block1->TestBend();
+		//}
 		//auto block1 = new Block(mesh_obj[0], glm::vec3(0.0f, 0.0f, 0.0f),
 		//	glm::vec3(0.0f), glm::vec3(0.5f), 0, 1, mesh_obj[0]->vertices_,
 		//	1, 5, 0, 3);
@@ -573,8 +633,8 @@ namespace game {
 		glUniformMatrix4fv(view_projection_loc_, 1, GL_FALSE, &view_projection[0][0]);
 
 		for (auto&& mesh_entity : mesh_entities_) {
-			mesh_entity.Simulate(0.01);
-			mesh_entity.CheckCollide();
+			//mesh_entity.Simulate(0.01);
+			//mesh_entity.CheckCollide();
 			auto model = mesh_entity.GetModelMatrix();
 			glUniform1i(id, mesh_entity.ID);
 			glUniformMatrix4fv(model_loc_, 1, GL_FALSE, &model[0][0]);
