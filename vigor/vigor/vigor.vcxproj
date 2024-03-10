@@ -145,6 +145,15 @@
     <ClCompile Include="application.cpp" />
     <ClCompile Include="Block.cpp" />
     <ClCompile Include="camera.cpp" />
+    <ClCompile Include="imgui.cpp" />
+    <ClCompile Include="imgui_demo.cpp" />
+    <ClCompile Include="imgui_draw.cpp" />
+    <ClCompile Include="imgui_impl_glfw.cpp">
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">HAS_GLFW;%(PreprocessorDefinitions);IMGUI_IMPL_OPENGL_LOADER_GL3W</PreprocessorDefinitions>
+    </ClCompile>
+    <ClCompile Include="imgui_impl_opengl3.cpp" />
+    <ClCompile Include="imgui_tables.cpp" />
+    <ClCompile Include="imgui_widgets.cpp" />
     <ClCompile Include="KeyType.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="massPoint.cpp" />
@@ -159,6 +168,13 @@
     <ClInclude Include="application.h" />
     <ClInclude Include="Block.h" />
     <ClInclude Include="camera.h" />
+    <ClInclude Include="imconfig.h" />
+    <ClInclude Include="imgui.h" />
+    <ClInclude Include="imgui_impl_glfw.h" />
+    <ClInclude Include="imgui_impl_opengl3.h" />
+    <ClInclude Include="imgui_internal.h" />
+    <ClInclude Include="imstb_rectpack.h" />
+    <ClInclude Include="imstb_truetype.h" />
     <ClInclude Include="KeyType.h" />
     <ClInclude Include="massPoint.h" />
     <ClInclude Include="Mesh.h" />

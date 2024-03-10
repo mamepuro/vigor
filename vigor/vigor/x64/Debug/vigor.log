@@ -4,19 +4,13 @@ C:\Users\ayata\OneDrive - 筑波大学\Develop\Dev\vigor\vigor\vigor\application
 C:\Users\ayata\OneDrive - 筑波大学\Develop\Dev\vigor\vigor\vigor\application.cpp(249,14): warning C4305: '初期化中': 'double' から 'float' へ切り詰めます。
 C:\Users\ayata\OneDrive - 筑波大学\Develop\Dev\vigor\vigor\vigor\application.cpp(226,19): warning C4101: 'res': ローカル変数は 1 度も使われていません。
 C:\Users\ayata\OneDrive - 筑波大学\Develop\Dev\vigor\vigor\vigor\application.cpp(225,9): warning C4101: 'pix': ローカル変数は 1 度も使われていません。
-C:\Users\ayata\OneDrive - 筑波大学\Develop\Dev\vigor\vigor\vigor\application.cpp(373,16): warning C4305: '初期化中': 'double' から 'float' へ切り詰めます。
-C:\Users\ayata\OneDrive - 筑波大学\Develop\Dev\vigor\vigor\vigor\application.cpp(374,17): warning C4305: '初期化中': 'double' から 'float' へ切り詰めます。
-Block.obj : warning LNK4099: PDB '' が 'Block.obj' で、または '' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
-camera.obj : warning LNK4099: PDB '' が 'camera.obj' で、または '' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
-KeyType.obj : warning LNK4099: PDB '' が 'KeyType.obj' で、または '' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
-main.obj : warning LNK4099: PDB '' が 'main.obj' で、または '' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
-massPoint.obj : warning LNK4099: PDB '' が 'massPoint.obj' で、または '' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
-Mesh.obj : warning LNK4099: PDB '' が 'Mesh.obj' で、または '' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
-MeshEntity.obj : warning LNK4099: PDB '' が 'MeshEntity.obj' で、または '' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
+C:\Users\ayata\OneDrive - 筑波大学\Develop\Dev\vigor\vigor\vigor\application.cpp(400,16): warning C4305: '初期化中': 'double' から 'float' へ切り詰めます。
+C:\Users\ayata\OneDrive - 筑波大学\Develop\Dev\vigor\vigor\vigor\application.cpp(401,17): warning C4305: '初期化中': 'double' から 'float' へ切り詰めます。
+C:\Users\ayata\OneDrive - 筑波大学\Develop\Dev\vigor\vigor\vigor\application.cpp(665,25): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
 Spring.obj : warning LNK4099: PDB '' が 'Spring.obj' で、または '' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
-springType.obj : warning LNK4099: PDB '' が 'springType.obj' で、または '' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
-test.obj : warning LNK4099: PDB '' が 'test.obj' で、または '' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
-Window.obj : warning LNK4099: PDB '' が 'Window.obj' で、または '' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
-glew32s.lib(glew.obj) : warning LNK4099: PDB '' が 'glew32s.lib(glew.obj)' で、または '' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
-LINK : warning LNK4098: defaultlib 'LIBCMT' は他のライブラリの使用と競合しています。/NODEFAULTLIB:library を使用してください。
+MeshEntity.obj : warning LNK4099: PDB '' が 'MeshEntity.obj' で、または '' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
+Mesh.obj : warning LNK4099: PDB '' が 'Mesh.obj' で、または '' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
+massPoint.obj : warning LNK4099: PDB '' が 'massPoint.obj' で、または '' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
+camera.obj : warning LNK4099: PDB '' が 'camera.obj' で、または '' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
+Block.obj : warning LNK4099: PDB '' が 'Block.obj' で、または '' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
   vigor.vcxproj -> C:\Users\ayata\OneDrive - 筑波大学\Develop\Dev\vigor\vigor\x64\Debug\vigor.exe

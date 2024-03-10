@@ -62,6 +62,7 @@ namespace game {
 		std::vector <Block> mesh_entities_;
 		std::unique_ptr<Camera> camera_;
 		int bid = 0;
+		float scale = 0.5f;
 		/**
 		 * @brief ‰Šú‰»ˆ—
 		 * @return ³íI—¹‚È‚ç‚ÎtrueAˆÙíI—¹‚È‚ç‚Îfalse
