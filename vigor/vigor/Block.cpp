@@ -49,6 +49,8 @@ namespace game {
 		//‹r‚ÌŠÔ‚Éƒoƒl‚ð“\‚é
 		massPoints[1]->AddSpring(massPoints[5], springType::Leg);
 		//massPoints[5]->AddSpring(massPoints[1], springType::Leg);
+		aabb = new AABB(world_position, ID);
+		
 	};
 
 	void Block::UpdateWorldPosition()

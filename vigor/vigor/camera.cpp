@@ -44,7 +44,13 @@ namespace game {
     void Camera::RecaluculateViewMatirx() {
         auto rotation = glm::eulerAngleYXZ(rotation_.y, rotation_.x, rotation_.z);
         auto translate = glm::translate(glm::mat4(1), position_);
-        view_matrix_ = glm::inverse(translate * rotation);
+        view_matrix_ = glm::lookAt(
+            position_,
+            position_ + glm::vec3(0, 0, -10),
+            glm::vec3(0, 1, 0)
+        );
+        //view_matrix_ = glm::inverse(translate * rotation);
+        
     }
 
 }  // namespace game

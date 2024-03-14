@@ -203,13 +203,13 @@ namespace game {
 					glfwGetCursorPos(window_, &x, &y);
 					double setx = (x - centerX) / centerX * 8;
 					double sety = -(y - centerY) / centerY * 5;
-					auto block = new Block(mesh, glm::vec3(setx, sety, 0.0f),
-						glm::vec3(0.0f), glm::vec3(1.0f), bid, 1, mesh->vertices_,
-						1, 5, 0, 3);
-					bid++;
-					mesh_entities_.emplace_back(*block);
+					//auto block = new Block(mesh, glm::vec3(setx, sety, 0.0f),
+					//	glm::vec3(0.0f), glm::vec3(1.0f), bid, 1, mesh->vertices_,
+					//	1, 5, 0, 3);
+					//bid++;
+					//mesh_entities_.emplace_back(*block);
 					std::cerr << "add block" << x << "," << y << std::endl;
-
+					PickBlock(x, y);
 					prevMouseState = GLFW_PRESS;
 				}
 				else
@@ -234,6 +234,7 @@ namespace game {
 				//);
 				//std::cerr << "P=" << +res[2] << "," << y << std::endl;
 				std::cerr << "cursol" << x << "," << y << std::endl;
+				
 
 			}
 			if (currentKeyStateSpace != prevKeyState)
@@ -603,6 +604,61 @@ namespace game {
 		return true;
 	}
 
+	bool Application::PickBlock(float screen_x, float screen_y) {
+		/*ŽÀ‘•‚Íhttps://ahbejarano.gitbook.io/lwjglgamedev/chapter-18‚ðŽQÆ*/
+		float normilize_x = (2 * screen_x) / 960 - 1; //960=width
+		float normilize_y = 1 - (2 * screen_y) / 540;
+		float normilize_z = -1; //ƒfƒoƒCƒX³‹K‰»À•WŒn‚ÌzÀ•W‚Í-1(–³ŒÀ‰“)‚Æ‚·‚é
+		float normilize_w = 1; //ƒfƒoƒCƒX³‹K‰»À•WŒn‚Ìw‚Í1‚Æ‚·‚é
+		bool is_intersect = false;
+		int hitID = -1;
+		glm::vec4 xyzw = glm::vec4(normilize_x, normilize_y, normilize_z, normilize_w);
+		// xyzw = glm::vec4(screen_x, screen_y, normilize_z, normilize_w);
+
+		//“Œ‰fs—ñ‚Ì‹ts—ñ‚ð‚©‚¯‚é
+		glm::vec4 inverse_projection = glm::inverse(camera_->GetProjectionMatrix()) * xyzw;
+		inverse_projection.z =-1;
+		inverse_projection.w = 0;
+		//“Œ‰fs—ñ‚Ì‹ts—ñ‚ð‚©‚¯‚é
+		glm::vec4 inverse_view = glm::inverse(camera_->GetViewMatrix()) * inverse_projection;
+		inverse_projection.w = 0;
+		inverse_view = glm::normalize(inverse_view);
+		std::cout << "world" << "x = " << inverse_view.x << ", y=" << inverse_view.y << std::endl;
+		for (auto&& mesh_entity : mesh_entities_)
+		{
+			is_intersect = 
+			CheckAABBIntersection(camera_->GetPosition(), 
+				inverse_view, 
+				mesh_entity.aabb->max_vertex, 
+				mesh_entity.aabb->min_vertex);
+			int a = 1; //test
+			if (is_intersect)
+			{
+				hitID = mesh_entity.ID;
+			}
+		}
+		return is_intersect;
+	}
+
+	bool Application::CheckAABBIntersection(glm::vec3 ray_position, glm::vec3 dir, glm::vec3 max, glm::vec3 min)
+	{
+		/* https://gist.github.com/DomNomNom/46bb1ce47f68d255fd5d */
+		glm::vec3 tMin = (min - ray_position) / dir;
+		glm::vec3 tMax = (max - ray_position) / dir;
+		glm::vec3 t1 = glm::min(tMin, tMax);
+		glm::vec3 t2 = glm::max(tMin, tMax);
+		float tNear = glm::max(glm::max(t1.x, t1.y), t1.z);
+		float tfar = glm::max(glm::max(t2.x, t2.y), t2.z);
+		if (tNear > tfar)
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+	}
+
 	bool Application::InitWindow(const GLuint width, const GLuint height) {
 		glfwSetErrorCallback(
 			[](auto id, auto description) { std::cerr << description << std::endl; });
@@ -662,8 +718,9 @@ namespace game {
 		glUniformMatrix4fv(view_projection_loc_, 1, GL_FALSE, &view_projection[0][0]);
 
 		for (auto&& mesh_entity : mesh_entities_) {
-			mesh_entity.Simulate(0.000001);
-			mesh_entity.CheckCollide();
+			//mesh_entity.Simulate(0.000001);
+			//mesh_entity.CheckCollide();
+			mesh_entity.aabb->SetMaxAndMinVerteices(mesh_entity.world_position);
 			auto model = mesh_entity.GetModelMatrix();
 			glUniform1i(id, mesh_entity.ID);
 			glUniformMatrix4fv(model_loc_, 1, GL_FALSE, &model[0][0]);

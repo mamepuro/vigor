@@ -69,6 +69,10 @@ namespace game {
 		 */
 		bool Init();
 
+		bool PickBlock(float screen_x, float screen_y);
+
+		bool CheckAABBIntersection(glm::vec3 ray_position, glm::vec3 dir, glm::vec3 max, glm::vec3 min);
+
 		/**
 		 * @brief GLFWのウィンドウを作成する
 		 * @param width ウィンドウの幅
@@ -85,6 +89,7 @@ namespace game {
 		 * @param delta_time 前フレームとの差分時間（秒）
 		 */
 		void Update(const double delta_time);
+
 	};
 
 }  // namespace game

@@ -1,16 +1,11 @@
 ﻿  application.cpp
-C:\Users\ayata\OneDrive - 筑波大学\Develop\Dev\vigor\vigor\vigor\MeshEntity.h(35,24): warning C4305: '初期化中': 'double' から 'const float' へ切り詰めます。
-C:\Users\ayata\OneDrive - 筑波大学\Develop\Dev\vigor\vigor\vigor\application.cpp(136,17): warning C4305: '初期化中': 'double' から 'float' へ切り詰めます。
-C:\Users\ayata\OneDrive - 筑波大学\Develop\Dev\vigor\vigor\vigor\application.cpp(249,14): warning C4305: '初期化中': 'double' から 'float' へ切り詰めます。
-C:\Users\ayata\OneDrive - 筑波大学\Develop\Dev\vigor\vigor\vigor\application.cpp(226,19): warning C4101: 'res': ローカル変数は 1 度も使われていません。
-C:\Users\ayata\OneDrive - 筑波大学\Develop\Dev\vigor\vigor\vigor\application.cpp(225,9): warning C4101: 'pix': ローカル変数は 1 度も使われていません。
-C:\Users\ayata\OneDrive - 筑波大学\Develop\Dev\vigor\vigor\vigor\application.cpp(400,16): warning C4305: '初期化中': 'double' から 'float' へ切り詰めます。
-C:\Users\ayata\OneDrive - 筑波大学\Develop\Dev\vigor\vigor\vigor\application.cpp(401,17): warning C4305: '初期化中': 'double' から 'float' へ切り詰めます。
-C:\Users\ayata\OneDrive - 筑波大学\Develop\Dev\vigor\vigor\vigor\application.cpp(665,25): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
-Spring.obj : warning LNK4099: PDB '' が 'Spring.obj' で、または '' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
-MeshEntity.obj : warning LNK4099: PDB '' が 'MeshEntity.obj' で、または '' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
-Mesh.obj : warning LNK4099: PDB '' が 'Mesh.obj' で、または '' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
-massPoint.obj : warning LNK4099: PDB '' が 'massPoint.obj' で、または '' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
-camera.obj : warning LNK4099: PDB '' が 'camera.obj' で、または '' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
-Block.obj : warning LNK4099: PDB '' が 'Block.obj' で、または '' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
-  vigor.vcxproj -> C:\Users\ayata\OneDrive - 筑波大学\Develop\Dev\vigor\vigor\x64\Debug\vigor.exe
+C:\dev\vigor\vigor\vigor\MeshEntity.h(35,15): warning C4305: '初期化中': 'double' から 'const float' へ切り詰めます。
+C:\dev\vigor\vigor\vigor\application.cpp(136,38): warning C4305: '初期化中': 'double' から 'float' へ切り詰めます。
+C:\dev\vigor\vigor\vigor\application.cpp(212,19): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\dev\vigor\vigor\vigor\application.cpp(212,16): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\dev\vigor\vigor\vigor\application.cpp(250,20): warning C4305: '初期化中': 'double' から 'float' へ切り詰めます。
+C:\dev\vigor\vigor\vigor\application.cpp(226,19): warning C4101: 'res': ローカル変数は 1 度も使われていません。
+C:\dev\vigor\vigor\vigor\application.cpp(225,9): warning C4101: 'pix': ローカル変数は 1 度も使われていません。
+C:\dev\vigor\vigor\vigor\application.cpp(401,37): warning C4305: '初期化中': 'double' から 'float' へ切り詰めます。
+C:\dev\vigor\vigor\vigor\application.cpp(402,44): warning C4305: '初期化中': 'double' から 'float' へ切り詰めます。
+  vigor.vcxproj -> C:\dev\vigor\vigor\x64\Debug\vigor.exe

@@ -142,6 +142,7 @@
     <None Include="shader.vert" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AABB.cpp" />
     <ClCompile Include="application.cpp" />
     <ClCompile Include="Block.cpp" />
     <ClCompile Include="camera.cpp" />
@@ -165,6 +166,7 @@
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AABB.h" />
     <ClInclude Include="application.h" />
     <ClInclude Include="Block.h" />
     <ClInclude Include="camera.h" />
